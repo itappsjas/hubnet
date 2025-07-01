@@ -47,7 +47,7 @@ export default function LoginPage() {
       } else {
         toast.error('Login gagal: Username atau password salah.')
       }
-    } catch (err) {
+    } catch {
       toast.error('Terjadi kesalahan saat login.')
     }
   }
@@ -80,7 +80,7 @@ export default function LoginPage() {
       } else {
         toast.error('Kode OTP salah. Silakan coba lagi.')
       }
-    } catch (err) {
+    } catch {
       toast.error('Terjadi kesalahan saat verifikasi.')
     }
   }
