@@ -20,7 +20,7 @@ export default function Sidebar() {
       </div>
 
       {/* Menu Ikon */}
-        <nav className="flex flex-col gap-12 items-center text-white text-4xl flex-1 justify-center">
+        <nav className="flex flex-col gap-6 items-center text-white text-4xl flex-1 justify-center">
             <a href="#" className="hover:text-yellow-200 transition-transform hover:scale-125">
                 <FaHome />
             </a>

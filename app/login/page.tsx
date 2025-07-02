@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation' // ✅ Tambahkan ini
-import toast from 'react-hot-toast' // ✅ Tambahkan ini
+import { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 
 export default function LoginPage() {
-  const router = useRouter() // ✅ Inisialisasi
+  const router = useRouter()
   const [step, setStep] = useState(1)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -13,9 +13,13 @@ export default function LoginPage() {
   const [secret, setSecret] = useState('')
   const [qr, setQr] = useState('')
   const [mounted, setMounted] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const usernameRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     setMounted(true)
+    usernameRef.current?.focus()
   }, [])
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -25,6 +29,8 @@ export default function LoginPage() {
       toast.error('Username dan password wajib diisi.')
       return
     }
+
+    setIsLoading(true)
 
     try {
       const res = await fetch('/api/login', {
@@ -49,6 +55,8 @@ export default function LoginPage() {
       }
     } catch {
       toast.error('Terjadi kesalahan saat login.')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -75,8 +83,7 @@ export default function LoginPage() {
 
       const data = await res.json()
       if (data.success) {
-        // ✅ Jangan pakai alert di sini
-        router.push('/dashboard') // ✅ Redirect langsung ke dashboard
+        router.push('/dashboard')
       } else {
         toast.error('Kode OTP salah. Silakan coba lagi.')
       }
@@ -116,6 +123,7 @@ export default function LoginPage() {
         {step === 1 ? (
           <form onSubmit={handleLogin} className="space-y-4">
             <input
+              ref={usernameRef}
               type="text"
               placeholder="Username"
               value={username}
@@ -133,9 +141,14 @@ export default function LoginPage() {
             />
             <button
               type="submit"
-              className="w-full p-3 rounded-md bg-orange-600 hover:bg-orange-700 text-white font-semibold tracking-wide transition"
+              disabled={isLoading}
+              className={`w-full p-3 rounded-md text-white font-semibold tracking-wide transition ${
+                isLoading
+                  ? 'bg-orange-400 cursor-not-allowed'
+                  : 'bg-orange-600 hover:bg-orange-700'
+              }`}
             >
-              Login
+              {isLoading ? 'Loading...' : 'Login'}
             </button>
           </form>
         ) : (

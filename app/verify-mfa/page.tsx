@@ -42,6 +42,9 @@ export default function VerifyMFA() {
         onChange={(e) => setToken(e.target.value)}
         placeholder="Masukkan kode OTP"
         className="border p-2 w-full mb-2"
+        autoFocus
+        required
+        pattern="\d{6}" // Validasi 6 digit angka
       />
       <button type="submit" className="bg-orange-500 text-white px-4 py-2 rounded">
         Verifikasi
