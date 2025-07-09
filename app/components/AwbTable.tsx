@@ -52,24 +52,24 @@ export default function AwbTable({ awbData }: { awbData: AwbData[] }) {
             key={index}
             className="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-md"
           >
-            <p className="text-sm text-gray-400 mb-1">AWB</p>
+            <p className="text-lg text-gray-400 mb-1">AWB</p>
             <p className="font-bold text-orange-300">{row.awb}</p>
 
             <div className="mt-2 grid grid-cols-2 text-sm gap-2">
               <div>
-                <p className="text-gray-400">Airline</p>
+                <p className="text-lg text-gray-400">Airline</p>
                 <p>{row.airline}</p>
               </div>
               <div>
-                <p className="text-gray-400">Weight</p>
+                <p className="text-lg text-gray-400">Weight</p>
                 <p>{row.weight}</p>
               </div>
               <div>
-                <p className="text-gray-400">Origin</p>
+                <p className="text-lg text-gray-400">Origin</p>
                 <p>{row.origin}</p>
               </div>
               <div>
-                <p className="text-gray-400">Destination</p>
+                <p className="text-lg text-gray-400">Destination</p>
                 <p>{row.destination}</p>
               </div>
             </div>
