@@ -11,6 +11,14 @@ interface AwbData {
   airline: string
 }
 
+interface RawAwbData {
+  AWB_NO: string
+  PORT_ORI: string
+  PORT_DIS: string
+  QTY_SHP_WGT: number | string
+  COD_FLT_CAR: string
+}
+
 export default function AwbTable() {
   const [awbData, setAwbData] = useState<AwbData[]>([])
   const [loading, setLoading] = useState(true)
@@ -19,10 +27,10 @@ export default function AwbTable() {
     const fetchData = async () => {
       try {
         const res = await fetch('/api/proxy/data-today')
-        const json = await res.json()
+        const json: { data?: { data?: RawAwbData[] } } = await res.json()
 
         if (json?.data?.data && Array.isArray(json.data.data)) {
-          const mapped = json.data.data.map((item: any) => ({
+          const mapped = json.data.data.map((item: RawAwbData) => ({
             awb: item.AWB_NO,
             origin: item.PORT_ORI,
             destination: item.PORT_DIS,
@@ -41,8 +49,8 @@ export default function AwbTable() {
     }
 
     fetchData()
-    const interval = setInterval(fetchData, 60000) // Refresh tiap 1 menit
-    return () => clearInterval(interval) // Bersihkan interval saat unmount
+    const interval = setInterval(fetchData, 60000)
+    return () => clearInterval(interval)
   }, [])
 
   const columns = [
