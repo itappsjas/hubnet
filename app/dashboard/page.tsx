@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import MobileNav from '../components/MobileNav'
 import PageHeader from '../components/PageHeader'
@@ -16,54 +15,7 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 
-interface AwbData {
-  awb: string
-  origin: string
-  destination: string
-  weight: string
-  airline: string
-}
-
-const fetchAwbData = async (): Promise<AwbData[]> => {
-  return [
-    {
-      awb: '618-12345675',
-      origin: 'CGK',
-      destination: 'SIN',
-      weight: '250kg',
-      airline: 'Singapore Airlines',
-    },
-    {
-      awb: '618-23456789',
-      origin: 'CGK',
-      destination: 'KUL',
-      weight: '120kg',
-      airline: 'Singapore Airlines',
-    },
-    {
-      awb: '126-98765432',
-      origin: 'CGK',
-      destination: 'DPS',
-      weight: '340kg',
-      airline: 'Garuda Indonesia',
-    },
-  ]
-}
-
 export default function DashboardPage() {
-  const [awbData, setAwbData] = useState<AwbData[]>([])
-
-  useEffect(() => {
-    const loadData = async () => {
-      const data = await fetchAwbData()
-      setAwbData(data)
-    }
-
-    loadData()
-    const interval = setInterval(loadData, 15000)
-    return () => clearInterval(interval)
-  }, [])
-
   // Data grafik dummy
   const todayChartData = [
     { name: '00:00', count: 0 },
@@ -92,42 +44,42 @@ export default function DashboardPage() {
 
         {/* Grafik Today & MTD */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            {/* Grafik Today */}
-            <div className="relative rounded-lg overflow-hidden">
-              <div className="absolute inset-0 bg-cargo-box opacity-10 z-0" />
-              <div className="relative z-10 p-4 bg-slate-700 bg-opacity-90 shadow-md rounded-lg">
-                <h2 className="text-lg font-semibold mb-2 text-yellow-400">📊 Today</h2>
-                <ResponsiveContainer width="100%" height={340}>
-                  <ComposedChart data={todayChartData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis allowDecimals={false} />
-                    <Tooltip />
-                    <Bar dataKey="count" barSize={30} fill="#f59e0b" />
-                    <Line type="monotone" dataKey="count" stroke="#fff" strokeWidth={2} />
-                  </ComposedChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-
-            {/* Grafik Month-To-Date */}
-            <div className="relative rounded-lg overflow-hidden">
-              <div className="absolute inset-0 bg-cargo-box opacity-10 z-0" />
-              <div className="relative z-10 p-4 bg-slate-700 bg-opacity-90 shadow-md rounded-lg">
-                <h2 className="text-lg font-semibold mb-2 text-yellow-400">📈 Month-To-Date</h2>
-                <ResponsiveContainer width="100%" height={340}>
-                  <ComposedChart data={mtdChartData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis allowDecimals={false} />
-                    <Tooltip />
-                    <Bar dataKey="count" barSize={30} fill="#3b82f6" />
-                    <Line type="monotone" dataKey="count" stroke="#22d3ee" strokeWidth={2} />
-                  </ComposedChart>
-                </ResponsiveContainer>
-              </div>
+          {/* Grafik Today */}
+          <div className="relative rounded-lg overflow-hidden">
+            <div className="absolute inset-0 bg-cargo-box opacity-10 z-0" />
+            <div className="relative z-10 p-4 bg-slate-700 bg-opacity-90 shadow-md rounded-lg">
+              <h2 className="text-lg font-semibold mb-2 text-yellow-400">📊 Today</h2>
+              <ResponsiveContainer width="100%" height={340}>
+                <ComposedChart data={todayChartData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis allowDecimals={false} />
+                  <Tooltip />
+                  <Bar dataKey="count" barSize={30} fill="#f59e0b" />
+                  <Line type="monotone" dataKey="count" stroke="#fff" strokeWidth={2} />
+                </ComposedChart>
+              </ResponsiveContainer>
             </div>
           </div>
+
+          {/* Grafik Month-To-Date */}
+          <div className="relative rounded-lg overflow-hidden">
+            <div className="absolute inset-0 bg-cargo-box opacity-10 z-0" />
+            <div className="relative z-10 p-4 bg-slate-700 bg-opacity-90 shadow-md rounded-lg">
+              <h2 className="text-lg font-semibold mb-2 text-yellow-400">📈 Month-To-Date</h2>
+              <ResponsiveContainer width="100%" height={340}>
+                <ComposedChart data={mtdChartData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis allowDecimals={false} />
+                  <Tooltip />
+                  <Bar dataKey="count" barSize={30} fill="#3b82f6" />
+                  <Line type="monotone" dataKey="count" stroke="#22d3ee" strokeWidth={2} />
+                </ComposedChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </div>
 
         {/* Filter Section */}
         <div className="mb-6 p-4 rounded-lg shadow-md">
@@ -179,7 +131,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Tabel AWB */}
-        <AwbTable awbData={awbData} />
+        <AwbTable />
         <p className="text-sm text-gray-400 mt-4">The data will be updated every 1 minutes</p>
       </main>
     </div>
