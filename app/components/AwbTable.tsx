@@ -1,4 +1,5 @@
 'use client'
+
 import { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import { Base64 } from 'js-base64'
@@ -11,45 +12,52 @@ interface AwbData {
   airline: string
 }
 
+// Tipe data mentah dari API
+interface RawAwbData {
+  AWB_NO: string
+  ORG: string
+  DST: string
+  WGT: string
+  AIRLINE_NAME: string
+}
+
 export default function AwbTable() {
   const [awbData, setAwbData] = useState<AwbData[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const username = 'EpostHubnet2025'
-      const password = 'Hackedby12100650'
-      const auth = 'Basic ' + Base64.encode(`${username}:${password}`)
+    const fetchData = async () => {
+      try {
+        const username = 'EpostHubnet2025'
+        const password = 'Hackedby12100650'
+        const auth = 'Basic ' + Base64.encode(`${username}:${password}`)
 
-      const res = await fetch('/api/proxy/data-today', {
-        headers: {
-          Authorization: auth,
-        },
-      })
+        const res = await fetch('/api/proxy/data-today', {
+          headers: {
+            Authorization: auth,
+          },
+        })
 
-      const json = await res.json()
+        const json: RawAwbData[] = await res.json()
 
-      if (json.success) {
-        const mapped = json.data.map((item: any) => ({
+        const mapped = json.map((item) => ({
           awb: item.AWB_NO,
           origin: item.ORG,
           destination: item.DST,
           weight: item.WGT,
           airline: item.AIRLINE_NAME,
         }))
+
         setAwbData(mapped)
+      } catch (error) {
+        console.error('❌ Gagal fetch:', error)
+      } finally {
+        setLoading(false)
       }
-    } catch (err) {
-      console.error('❌ Gagal fetch:', err)
-    } finally {
-      setLoading(false)
     }
-  }
 
-  fetchData()
-}, [])
-
+    fetchData()
+  }, [])
 
   const columns = [
     { name: 'AWB', selector: (row: AwbData) => row.awb, sortable: true },
@@ -61,7 +69,9 @@ export default function AwbTable() {
 
   return (
     <div className="p-4">
-      <h2 className="text-xl font-bold text-orange-400 mb-4">Data Airway Bill Hari Ini</h2>
+      <h2 className="text-xl font-bold text-orange-400 mb-4">
+        Data Airway Bill Hari Ini
+      </h2>
 
       {loading ? (
         <p className="text-gray-400">Loading...</p>

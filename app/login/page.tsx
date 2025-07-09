@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import Image from 'next/image'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -159,7 +160,7 @@ export default function LoginPage() {
 
             {qr && (
               <div className="flex justify-center mb-4">
-                <img
+                <Image
                   src={qr}
                   alt="QR Code"
                   className="w-40 h-40 border border-white/30 rounded-md"
