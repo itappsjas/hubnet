@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
-import { Base64 } from 'js-base64'
 
 interface AwbData {
   awb: string
@@ -28,27 +27,21 @@ export default function AwbTable() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const username = 'EpostHubnet2025'
-        const password = 'Hackedby12100650'
-        const auth = 'Basic ' + Base64.encode(`${username}:${password}`)
+        const res = await fetch('/api/proxy/data-today')
+        const json = await res.json()
 
-        const res = await fetch('/api/proxy/data-today', {
-          headers: {
-            Authorization: auth,
-          },
-        })
-
-        const json: RawAwbData[] = await res.json()
-
-        const mapped = json.map((item) => ({
-          awb: item.AWB_NO,
-          origin: item.ORG,
-          destination: item.DST,
-          weight: item.WGT,
-          airline: item.AIRLINE_NAME,
-        }))
-
-        setAwbData(mapped)
+        if (json.success && Array.isArray(json.data)) {
+          const mapped = json.data.map((item: RawAwbData) => ({
+            awb: item.AWB_NO,
+            origin: item.ORG,
+            destination: item.DST,
+            weight: item.WGT,
+            airline: item.AIRLINE_NAME,
+          }))
+          setAwbData(mapped)
+        } else {
+          console.warn('⚠️ Data kosong atau tidak sesuai format:', json)
+        }
       } catch (error) {
         console.error('❌ Gagal fetch:', error)
       } finally {
@@ -57,6 +50,10 @@ export default function AwbTable() {
     }
 
     fetchData()
+
+    // Optional: refresh otomatis tiap 1 menit
+    const interval = setInterval(fetchData, 60000)
+    return () => clearInterval(interval)
   }, [])
 
   const columns = [
