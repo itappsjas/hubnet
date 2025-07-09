@@ -11,46 +11,38 @@ interface AwbData {
   airline: string
 }
 
-// Tipe data mentah dari API
-interface RawAwbData {
-  AWB_NO: string
-  ORG: string
-  DST: string
-  WGT: string
-  AIRLINE_NAME: string
-}
-
 export default function AwbTable() {
   const [awbData, setAwbData] = useState<AwbData[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
-  try {
-    const res = await fetch('/api/proxy/data-today')
-    const json = await res.json()
+      try {
+        const res = await fetch('/api/proxy/data-today')
+        const json = await res.json()
 
-    const data = Array.isArray(json.data) ? json.data : json
-    const mapped = data.map((item: RawAwbData) => ({
-      awb: item.AWB_NO,
-      origin: item.ORG,
-      destination: item.DST,
-      weight: item.WGT,
-      airline: item.AIRLINE_NAME,
-    }))
-    setAwbData(mapped)
-  } catch (error) {
-    console.error('❌ Gagal fetch:', error)
-  } finally {
-    setLoading(false)
-  }
-}
+        if (json?.data?.data && Array.isArray(json.data.data)) {
+          const mapped = json.data.data.map((item: any) => ({
+            awb: item.AWB_NO,
+            origin: item.PORT_ORI,
+            destination: item.PORT_DIS,
+            weight: String(item.QTY_SHP_WGT),
+            airline: item.COD_FLT_CAR,
+          }))
+          setAwbData(mapped)
+        } else {
+          console.warn('⚠️ Format response tidak sesuai:', json)
+        }
+      } catch (error) {
+        console.error('❌ Gagal fetch:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
 
     fetchData()
-
-    // Optional: refresh otomatis tiap 1 menit
-    const interval = setInterval(fetchData, 60000)
-    return () => clearInterval(interval)
+    const interval = setInterval(fetchData, 60000) // Refresh tiap 1 menit
+    return () => clearInterval(interval) // Bersihkan interval saat unmount
   }, [])
 
   const columns = [
