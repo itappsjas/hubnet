@@ -15,7 +15,7 @@ export async function GET() {
 
     const data = await res.json()
     return NextResponse.json(data)
-  } catch (err) {
+  } catch (_) {
     return NextResponse.json({ error: 'Gagal fetch dari API lokal' }, { status: 500 })
   }
 }
