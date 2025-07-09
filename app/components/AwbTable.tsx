@@ -26,28 +26,25 @@ export default function AwbTable() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const res = await fetch('/api/proxy/data-today')
-        const json = await res.json()
+  try {
+    const res = await fetch('/api/proxy/data-today')
+    const json = await res.json()
 
-        if (json.success && Array.isArray(json.data)) {
-          const mapped = json.data.map((item: RawAwbData) => ({
-            awb: item.AWB_NO,
-            origin: item.ORG,
-            destination: item.DST,
-            weight: item.WGT,
-            airline: item.AIRLINE_NAME,
-          }))
-          setAwbData(mapped)
-        } else {
-          console.warn('⚠️ Data kosong atau tidak sesuai format:', json)
-        }
-      } catch (error) {
-        console.error('❌ Gagal fetch:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
+    const data = Array.isArray(json.data) ? json.data : json
+    const mapped = data.map((item: RawAwbData) => ({
+      awb: item.AWB_NO,
+      origin: item.ORG,
+      destination: item.DST,
+      weight: item.WGT,
+      airline: item.AIRLINE_NAME,
+    }))
+    setAwbData(mapped)
+  } catch (error) {
+    console.error('❌ Gagal fetch:', error)
+  } finally {
+    setLoading(false)
+  }
+}
 
     fetchData()
 
