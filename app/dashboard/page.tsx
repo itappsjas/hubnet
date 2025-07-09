@@ -92,42 +92,42 @@ export default function DashboardPage() {
 
         {/* Grafik Today & MTD */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          {/* Grafik Today */}
-          <div className="relative rounded-lg overflow-hidden">
-            <div className="absolute inset-0 bg-cargo-box opacity-10 z-0" />
-            <div className="relative z-10 p-4 bg-slate-700 bg-opacity-90 shadow-md rounded-lg">
-              <h2 className="text-lg font-semibold mb-2 text-yellow-400">📊 Today</h2>
-              <ResponsiveContainer width="100%" height={320}>
-                <ComposedChart data={todayChartData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis allowDecimals={false} />
-                  <Tooltip />
-                  <Bar dataKey="count" barSize={30} fill="#f59e0b" />
-                  <Line type="monotone" dataKey="count" stroke="#fff" strokeWidth={2} />
-                </ComposedChart>
-              </ResponsiveContainer>
+            {/* Grafik Today */}
+            <div className="relative rounded-lg overflow-hidden">
+              <div className="absolute inset-0 bg-cargo-box opacity-10 z-0" />
+              <div className="relative z-10 p-4 bg-slate-700 bg-opacity-90 shadow-md rounded-lg">
+                <h2 className="text-lg font-semibold mb-2 text-yellow-400">📊 Today</h2>
+                <ResponsiveContainer width="100%" height={340}>
+                  <ComposedChart data={todayChartData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis allowDecimals={false} />
+                    <Tooltip />
+                    <Bar dataKey="count" barSize={30} fill="#f59e0b" />
+                    <Line type="monotone" dataKey="count" stroke="#fff" strokeWidth={2} />
+                  </ComposedChart>
+                </ResponsiveContainer>
+              </div>
             </div>
-          </div>
 
-          {/* Grafik MTD */}
-          <div className="relative rounded-lg overflow-hidden">
-            <div className="absolute inset-0 bg-cargo-box opacity-10 z-0" />
-            <div className="relative z-10 p-4 bg-slate-700 bg-opacity-90 shadow-md rounded-lg">
-              <h2 className="text-lg font-semibold mb-2 text-yellow-400">📈 Month-To-Date</h2>
-              <ResponsiveContainer width="100%" height={320}>
-                <ComposedChart data={mtdChartData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis allowDecimals={false} />
-                  <Tooltip />
-                  <Bar dataKey="count" barSize={30} fill="#3b82f6" />
-                  <Line type="monotone" dataKey="count" stroke="#22d3ee" strokeWidth={2} />
-                </ComposedChart>
-              </ResponsiveContainer>
+            {/* Grafik Month-To-Date */}
+            <div className="relative rounded-lg overflow-hidden">
+              <div className="absolute inset-0 bg-cargo-box opacity-10 z-0" />
+              <div className="relative z-10 p-4 bg-slate-700 bg-opacity-90 shadow-md rounded-lg">
+                <h2 className="text-lg font-semibold mb-2 text-yellow-400">📈 Month-To-Date</h2>
+                <ResponsiveContainer width="100%" height={340}>
+                  <ComposedChart data={mtdChartData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis allowDecimals={false} />
+                    <Tooltip />
+                    <Bar dataKey="count" barSize={30} fill="#3b82f6" />
+                    <Line type="monotone" dataKey="count" stroke="#22d3ee" strokeWidth={2} />
+                  </ComposedChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </div>
-        </div>
 
         {/* Filter Section */}
         <div className="mb-6 p-4 rounded-lg shadow-md">
