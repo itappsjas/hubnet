@@ -1,5 +1,5 @@
 // app/api/proxy/data-today/route.ts
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 
 export async function GET() {
   const username = 'EpostHubnet2025'
