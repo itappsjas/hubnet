@@ -92,6 +92,28 @@ export default function DashboardPage() {
           </div>
         </div>
 
+        {/* Generate Report Button */}
+        <div className="mb-6 flex justify-end">
+          <button 
+            type="button"
+            className="btn space-x-2 bg-yellow-500 font-medium text-slate-800 hover:bg-yellow-400 hover:shadow-lg hover:shadow-yellow-500/50 focus:bg-yellow-400 focus:shadow-lg focus:shadow-yellow-500/50 active:bg-yellow-600 px-6 py-3 rounded-lg transition-all duration-200 inline-flex items-center"
+          >
+            <span>Generate Report</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+
         {/* Tabel AWB */}
         <AwbTable />
         <p className="text-sm text-gray-400 mt-4">The data will be updated every 1 minutes</p>
