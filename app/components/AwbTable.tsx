@@ -63,9 +63,9 @@ export default function AwbTable() {
 
   return (
     <div className="p-4">
-      <h2 className="text-xl font-bold text-orange-400 mb-4">
+      <h4 className="text-xl font-bold text-orange-400 mb-4">
         Data Airway Bill Hari Ini
-      </h2>
+      </h4>
 
       {loading ? (
         <p className="text-gray-400">Loading...</p>
@@ -106,7 +106,7 @@ export default function AwbTable() {
                 <p className="text-lg text-gray-400 mb-1">AWB</p>
                 <p className="font-bold text-orange-300">{row.awb}</p>
 
-                <div className="mt-2 grid grid-cols-2 text-sm gap-2">
+                <div className="mt-2 grid grid-cols-2 text-lg gap-2">
                   <div>
                     <p className="text-lg text-gray-400">Airline</p>
                     <p>{row.airline}</p>

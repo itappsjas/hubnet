@@ -28,10 +28,10 @@ export default function Sidebar() {
             {/* Garis bawah ikon terakhir */}
             <div className="w-10 border-b border-white/30 my-4" />
 
-            <a href="#" className="hover:text-yellow-200 transition-transform hover:scale-125">
+            <a href="airline" className="hover:text-yellow-200 transition-transform hover:scale-125">
                 <FaPlane />
             </a>
-            <a href="#" className="hover:text-yellow-200 transition-transform hover:scale-125">
+            <a href="report" className="hover:text-yellow-200 transition-transform hover:scale-125">
                 <MdSummarize />
             </a>
 
