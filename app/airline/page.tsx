@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar";
 import MobileNav from "../components/MobileNav";
 import PageHeader from "../components/PageHeader";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function DashboardPage() {
   return (
@@ -16,7 +17,10 @@ export default function DashboardPage() {
         {/* Airline Cargo Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
           {/* Qatar Airways */}
-          <a href="#" className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-orange-500/90 via-orange-600/90 to-orange-700/90 backdrop-blur-sm border border-orange-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block">
+          <Link
+            href="/airline_detail?airline=QR"
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-orange-500/90 via-orange-600/90 to-orange-700/90 backdrop-blur-sm border border-orange-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
+          >
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-radial from-white/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
@@ -74,10 +78,13 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
 
           {/* Nam Air */}
-          <a href="#" className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-red-500/90 via-red-600/90 to-red-700/90 backdrop-blur-sm border border-red-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block">
+          <Link
+            href="/airline_detail?airline=IN"
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-red-500/90 via-red-600/90 to-red-700/90 backdrop-blur-sm border border-red-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
+          >
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-radial from-white/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
@@ -135,10 +142,13 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
 
           {/* Singapore Airlines */}
-          <a href="#" className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-500/90 via-blue-600/90 to-blue-700/90 backdrop-blur-sm border border-blue-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block">
+          <Link
+            href="/airline_detail?airline=SQ"
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-500/90 via-blue-600/90 to-blue-700/90 backdrop-blur-sm border border-blue-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
+          >
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-radial from-white/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
@@ -198,10 +208,13 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
 
           {/* Air Asia */}
-          <a href="#" className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-yellow-500/90 via-yellow-600/90 to-yellow-700/90 backdrop-blur-sm border border-yellow-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block">
+          <Link
+            href="/airline_detail?airline=AK"
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-yellow-500/90 via-yellow-600/90 to-yellow-700/90 backdrop-blur-sm border border-yellow-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
+          >
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-radial from-white/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
@@ -259,10 +272,13 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
 
           {/* Cebu Pacific */}
-          <a href="#" className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-red-500/90 via-red-600/90 to-red-700/90 backdrop-blur-sm border border-red-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block">
+          <a
+            href="#"
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-red-500/90 via-red-600/90 to-red-700/90 backdrop-blur-sm border border-red-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
+          >
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-radial from-white/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
@@ -323,7 +339,10 @@ export default function DashboardPage() {
           </a>
 
           {/* Air India */}
-          <a href="#" className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-yellow-500/90 via-yellow-600/90 to-yellow-700/90 backdrop-blur-sm border border-yellow-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block">
+          <a
+            href="#"
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-yellow-500/90 via-yellow-600/90 to-yellow-700/90 backdrop-blur-sm border border-yellow-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
+          >
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-radial from-white/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
@@ -384,7 +403,10 @@ export default function DashboardPage() {
           </a>
 
           {/* Eva Air */}
-          <a href="#" className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-orange-500/90 via-orange-600/90 to-orange-700/90 backdrop-blur-sm border border-orange-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block">
+          <a
+            href="#"
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-orange-500/90 via-orange-600/90 to-orange-700/90 backdrop-blur-sm border border-orange-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
+          >
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-radial from-white/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
@@ -445,7 +467,10 @@ export default function DashboardPage() {
           </a>
 
           {/* Air Fast Indonesia*/}
-          <a href="#" className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-500/90 via-blue-600/90 to-blue-700/90 backdrop-blur-sm border border-blue-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block">
+          <a
+            href="#"
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-500/90 via-blue-600/90 to-blue-700/90 backdrop-blur-sm border border-blue-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
+          >
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-radial from-white/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
@@ -507,7 +532,10 @@ export default function DashboardPage() {
           </a>
 
           {/* Etihad Airways */}
-          <a href="#" className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-500/90 via-blue-600/90 to-blue-700/90 backdrop-blur-sm border border-blue-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block">
+          <a
+            href="#"
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-500/90 via-blue-600/90 to-blue-700/90 backdrop-blur-sm border border-blue-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
+          >
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-radial from-white/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
@@ -568,7 +596,10 @@ export default function DashboardPage() {
           </a>
 
           {/* Saudia */}
-          <a href="#" className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-orange-500/90 via-orange-600/90 to-orange-700/90 backdrop-blur-sm border border-orange-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block">
+          <a
+            href="#"
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-orange-500/90 via-orange-600/90 to-orange-700/90 backdrop-blur-sm border border-orange-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
+          >
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-radial from-white/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
@@ -629,7 +660,10 @@ export default function DashboardPage() {
           </a>
 
           {/* Oman Air */}
-          <a href="#" className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-red-500/90 via-red-600/90 to-red-700/90 backdrop-blur-sm border border-red-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block">
+          <a
+            href="#"
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-red-500/90 via-red-600/90 to-red-700/90 backdrop-blur-sm border border-red-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
+          >
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-radial from-white/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
@@ -690,7 +724,10 @@ export default function DashboardPage() {
           </a>
 
           {/* All Nippon Airways*/}
-          <a href="#" className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-yellow-500/90 via-yellow-600/90 to-yellow-700/90 backdrop-blur-sm border border-yellow-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block">
+          <a
+            href="#"
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-yellow-500/90 via-yellow-600/90 to-yellow-700/90 backdrop-blur-sm border border-yellow-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
+          >
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-radial from-white/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
