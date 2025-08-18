@@ -275,8 +275,8 @@ export default function DashboardPage() {
           </Link>
 
           {/* Cebu Pacific */}
-          <a
-            href="#"
+          <Link
+            href="/airline_detail?airline=5J"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-red-500/90 via-red-600/90 to-red-700/90 backdrop-blur-sm border border-red-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -336,11 +336,11 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
 
           {/* Air India */}
-          <a
-            href="#"
+          <Link
+            href="/airline_detail?airline=AI"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-yellow-500/90 via-yellow-600/90 to-yellow-700/90 backdrop-blur-sm border border-yellow-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -400,11 +400,11 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
 
           {/* Eva Air */}
-          <a
-            href="#"
+          <Link
+            href="/airline_detail?airline=BR"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-orange-500/90 via-orange-600/90 to-orange-700/90 backdrop-blur-sm border border-orange-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -464,11 +464,11 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
 
           {/* Air Fast Indonesia*/}
-          <a
-            href="#"
+          <Link
+            href="/airline_detail?airline=FS"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-500/90 via-blue-600/90 to-blue-700/90 backdrop-blur-sm border border-blue-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -529,11 +529,11 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
 
           {/* Etihad Airways */}
-          <a
-            href="#"
+          <Link
+            href="/airline_detail?airline=EY"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-500/90 via-blue-600/90 to-blue-700/90 backdrop-blur-sm border border-blue-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -593,11 +593,11 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
 
           {/* Saudia */}
-          <a
-            href="#"
+          <Link
+            href="/airline_detail?airline=SV"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-orange-500/90 via-orange-600/90 to-orange-700/90 backdrop-blur-sm border border-orange-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -657,11 +657,11 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
 
           {/* Oman Air */}
-          <a
-            href="#"
+          <Link
+            href="/airline_detail?airline=WY"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-red-500/90 via-red-600/90 to-red-700/90 backdrop-blur-sm border border-red-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -721,11 +721,11 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
 
           {/* All Nippon Airways*/}
-          <a
-            href="#"
+          <Link
+            href="/airline_detail?airline=NH"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-yellow-500/90 via-yellow-600/90 to-yellow-700/90 backdrop-blur-sm border border-yellow-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -785,7 +785,7 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
         </div>
       </main>
     </div>
