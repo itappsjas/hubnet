@@ -107,9 +107,9 @@ function AirlineDetailContent() {
   ];
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-[#0a0e1a] via-[#1a2744] to-[#0f1829] text-white relative overflow-hidden">
+    <div className="flex min-h-screen bg-gradient-to-br from-[#0a0e1a] via-[#1a2744] to-[#0f1829] text-white overflow-hidden">
       {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-cyan-500/3 to-blue-500/3 rounded-full blur-3xl animate-spin-slow"></div>
@@ -117,7 +117,7 @@ function AirlineDetailContent() {
 
       <Sidebar />
       <MobileNav />
-      <main className="flex-1 p-4 flex flex-col h-screen relative z-10">
+      <main className="flex-1 p-6 flex flex-col min-h-screen relative z-10 overflow-y-auto">
         {/* Header Pesawat - Enhanced */}
         <div className="mb-6">
           <div className="relative w-full h-28 rounded-3xl overflow-hidden shadow-2xl border border-white/10 backdrop-blur-sm">
@@ -155,9 +155,9 @@ function AirlineDetailContent() {
         </div>
 
         {/* Main Content - Enhanced Layout */}
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 min-h-0">
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 pb-6">
           {/* Kiri - Enhanced Cargo Visual */}
-          <div className="lg:col-span-5 flex flex-col justify-center">
+          <div className="lg:col-span-5 flex flex-col space-y-6">
             <div className="relative">
               {/* Multiple Animated Background Layers */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -183,8 +183,8 @@ function AirlineDetailContent() {
               </div>
 
               {/* Enhanced Stats Grid */}
-              <div className="grid grid-cols-3 gap-3 mt-6">
-                <div className="group relative overflow-hidden bg-gradient-to-br from-blue-500/10 to-blue-600/5 backdrop-blur-md rounded-2xl border border-blue-500/20 p-4 hover:border-blue-400/40 transition-all duration-300">
+              <div className="grid grid-cols-3 gap-4 mt-6">
+                <div className="group relative bg-gradient-to-br from-blue-500/10 to-blue-600/5 backdrop-blur-md rounded-xl border border-blue-500/20 p-5 hover:border-blue-400/40 transition-all duration-300">
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="relative text-center">
                     {/* <div className="flex items-center justify-center mb-2">
@@ -199,7 +199,7 @@ function AirlineDetailContent() {
                   </div>
                 </div>
 
-                <div className="group relative overflow-hidden bg-gradient-to-br from-green-500/10 to-green-600/5 backdrop-blur-md rounded-2xl border border-green-500/20 p-4 hover:border-green-400/40 transition-all duration-300">
+                <div className="group relative bg-gradient-to-br from-green-500/10 to-green-600/5 backdrop-blur-md rounded-2xl border border-green-500/20 p-4 hover:border-green-400/40 transition-all duration-300">
                   <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="relative text-center">
                     {/* <div className="flex items-center justify-center mb-2">
@@ -214,7 +214,7 @@ function AirlineDetailContent() {
                   </div>
                 </div>
 
-                <div className="group relative overflow-hidden bg-gradient-to-br from-yellow-500/10 to-yellow-600/5 backdrop-blur-md rounded-2xl border border-yellow-500/20 p-4 hover:border-yellow-400/40 transition-all duration-300">
+                <div className="group relative bg-gradient-to-br from-yellow-500/10 to-yellow-600/5 backdrop-blur-md rounded-2xl border border-yellow-500/20 p-4 hover:border-yellow-400/40 transition-all duration-300">
                   <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="relative text-center">
                     {/* <div className="flex items-center justify-center mb-2">
@@ -245,36 +245,153 @@ function AirlineDetailContent() {
           </div>
 
           {/* Kanan - Enhanced AWB Details */}
-          <div className="lg:col-span-7 flex flex-col min-h-0">
+          <div className="lg:col-span-7 flex flex-col space-y-6">
             {/* Enhanced Header */}
-            <div className="relative overflow-hidden bg-gradient-to-r from-slate-800/30 to-slate-700/30 backdrop-blur-sm rounded-2xl border border-white/10 p-4 mb-4">
-              <div className="relative flex items-center justify-between">
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-1">
-                    ✈️ AWB Manifest
-                  </h3>
-                  <p className="text-cyan-400 text-sm">
-                    🌍 Destination: {cargoSummary.destination}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <div className="flex items-center space-x-2 mb-1">
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-400 border border-yellow-500/30">
-                      🔄 {cargoSummary.status}
-                    </span>
+            <div className="relative bg-gradient-to-r from-slate-800/30 to-slate-700/30 backdrop-blur-sm rounded-2xl border border-white/10 p-6">
+              <div className="relative flex flex-col space-y-4">
+                {/* Header with Title and Status */}
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="text-xl font-bold text-white">
+                      ✈️ Flight Information
+                    </h3>
+                    <div className="flex items-center mt-2 space-x-2">
+                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-400 border border-yellow-500/30">
+                        🔄 {cargoSummary.status}
+                      </span>
+                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-400 border border-blue-500/30">
+                        🌐 Domestic
+                      </span>
+                    </div>
                   </div>
-                  <p className="text-xs text-gray-400">
-                    🕒 ETD:{" "}
-                    <span className="text-green-400 font-semibold">
-                      {cargoSummary.estimatedDeparture}
-                    </span>
-                  </p>
+                  <div className="text-right">
+                    <p className="text-sm text-gray-400">
+                      📅 Flight Date:{" "}
+                      <span className="text-white font-medium">
+                        14 AUG 2025
+                      </span>
+                    </p>
+                    <p className="text-sm text-gray-400 mt-1">
+                      🕒 ETD:{" "}
+                      <span className="text-green-400 font-semibold">
+                        {cargoSummary.estimatedDeparture}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* Flight Path Visualization */}
+                <div className="flex items-center justify-between mt-6 px-6">
+                  {/* Departure */}
+                  <div className="text-center">
+                    <p className="text-sm font-semibold text-cyan-400">HKG</p>
+                    <p className="text-xs text-gray-400 mt-1">Hong Kong</p>
+                  </div>
+
+                  {/* Flight Path */}
+                  <div className="flex-1 relative flex items-center justify-center mx-6 h-24">
+                    <svg
+                      className="absolute inset-0 w-full h-full"
+                      viewBox="0 0 100 40"
+                      preserveAspectRatio="none"
+                    >
+                      {/* Main curved dashed line */}
+                      <path
+                        d="M0,32 Q50,4 100,32"
+                        stroke="url(#mainGradient)"
+                        strokeWidth="1.5"
+                        strokeDasharray="1.5 3.5"
+                        strokeLinecap="round"
+                        fill="transparent"
+                      />
+
+                      {/* Subtle accent underlay */}
+                      <path
+                        d="M0,32 Q50,4 100,32"
+                        stroke="url(#accentGradient)"
+                        strokeWidth="0.8"
+                        strokeDasharray="1 6"
+                        strokeLinecap="round"
+                        fill="transparent"
+                        className="opacity-50"
+                      />
+
+                      <defs>
+                        {/* Main line gradient */}
+                        <linearGradient
+                          id="mainGradient"
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="0%"
+                        >
+                          <stop
+                            offset="0%"
+                            stopColor="#06b6d4"
+                            stopOpacity="0.9"
+                          />
+                          <stop
+                            offset="50%"
+                            stopColor="#ffffff"
+                            stopOpacity="1"
+                          />
+                          <stop
+                            offset="100%"
+                            stopColor="#06b6d4"
+                            stopOpacity="0.9"
+                          />
+                        </linearGradient>
+
+                        {/* Accent gradient */}
+                        <linearGradient
+                          id="accentGradient"
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="0%"
+                        >
+                          <stop
+                            offset="0%"
+                            stopColor="#06b6d4"
+                            stopOpacity="0.4"
+                          />
+                          <stop
+                            offset="50%"
+                            stopColor="#ffffff"
+                            stopOpacity="0.6"
+                          />
+                          <stop
+                            offset="100%"
+                            stopColor="#06b6d4"
+                            stopOpacity="0.4"
+                          />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+
+                    {/* Plane & duration */}
+                    <div className="absolute top-6 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                      <div className="relative flex flex-col items-center">
+                        <span className="text-white text-xl transform rotate-[25deg] drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]">
+                          ✈️
+                        </span>
+                        <p className="mt-2 text-xs text-cyan-300 font-medium bg-slate-900/70 px-3 py-0.5 rounded-full border border-cyan-500/20 backdrop-blur-sm whitespace-nowrap">
+                          901.35 km • 2h 45m
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Arrival */}
+                  <div className="text-center">
+                    <p className="text-sm font-semibold text-cyan-400">CGK</p>
+                    <p className="text-xs text-gray-400 mt-1">Jakarta</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Enhanced AWB List */}
-            <div className="flex-1 relative overflow-hidden bg-gradient-to-br from-slate-800/20 to-slate-900/20 backdrop-blur-sm rounded-2xl border border-white/10 p-4">
+            <div className="flex-1 relative bg-gradient-to-br from-slate-800/20 to-slate-900/20 backdrop-blur-sm rounded-2xl border border-white/10 p-4">
               <div className="relative flex items-center justify-between mb-4">
                 <h4 className="text-lg font-bold text-white flex items-center">
                   📋 Air Waybill Details
@@ -287,11 +404,11 @@ function AirlineDetailContent() {
               </div>
 
               {/* Enhanced AWB Cards */}
-              <div className="space-y-3 max-h-[300px] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
+              <div className="space-y-3 max-h-[320px] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
                 {awbData.map((awb, index) => (
                   <div
                     key={awb.awbNumber}
-                    className="group relative overflow-hidden bg-gradient-to-r from-slate-800/40 to-slate-700/20 backdrop-blur-sm rounded-xl border border-white/10 p-4 hover:border-white/20 transition-all duration-300"
+                    className="group relative bg-gradient-to-r from-slate-800/40 to-slate-700/20 backdrop-blur-sm rounded-xl border border-white/10 p-5 hover:border-white/20 transition-all duration-300"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
                     <div className="relative flex items-center justify-between mb-3">
@@ -351,28 +468,37 @@ function AirlineDetailContent() {
                   </div>
                 ))}
               </div>
-
-              {/* Enhanced Summary Footer */}
-              <div className="mt-4 pt-4 border-t border-white/10 relative">
-                <div className="grid grid-cols-3 gap-4 mt-6">
-                  <div className="text-center p-3 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-xl border border-blue-500/20">
-                    <p className="text-blue-300 text-xs mb-1">📊 Total AWB</p>
-                    <p className="text-xl font-bold text-blue-400">
-                      {awbData.length}
-                    </p>
-                  </div>
-                  <div className="text-center p-3 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-xl border border-green-500/20">
-                    <p className="text-green-300 text-xs mb-1">✅ Loaded</p>
-                    <p className="text-xl font-bold text-green-400">
-                      {awbData.filter((awb) => awb.status === "Loaded").length}
-                    </p>
-                  </div>
-                  <div className="text-center p-3 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 rounded-xl border border-yellow-500/20">
-                    <p className="text-yellow-300 text-xs mb-1">⏳ Loading</p>
-                    <p className="text-xl font-bold text-yellow-400">
-                      {awbData.filter((awb) => awb.status === "Loading").length}
-                    </p>
-                  </div>
+            </div>
+            {/* Product Details Section */}
+            <div className="relative bg-gradient-to-r from-slate-800/30 to-slate-700/30 backdrop-blur-sm rounded-2xl border border-white/10 p-6">
+              <h4 className="text-lg font-bold text-white flex items-center mb-4">
+                📦 Product Details
+              </h4>
+              <div className="grid grid-cols-3 gap-6">
+                <div className="text-center p-4 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 rounded-xl border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300">
+                  <p className="text-purple-300 text-sm mb-2">✈️ PCF</p>
+                  <p className="text-2xl font-bold text-purple-400">87.5%</p>
+                  {/* <p className="text-xs text-purple-300/70 mt-1">
+                    Passenger Capacity Factor
+                  </p> */}
+                </div>
+                <div className="text-center p-4 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-xl border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300">
+                  <p className="text-blue-300 text-sm mb-2">
+                    👥 Total Passenger
+                  </p>
+                  <p className="text-2xl font-bold text-blue-400">175</p>
+                  {/* <p className="text-xs text-blue-300/70 mt-1">
+                    Current Passengers
+                  </p> */}
+                </div>
+                <div className="text-center p-4 bg-gradient-to-br from-emerald-500/10 to-green-500/10 rounded-xl border border-emerald-500/20 hover:border-emerald-400/40 transition-all duration-300">
+                  <p className="text-emerald-300 text-sm mb-2">
+                    🛫 Total Pax/Flight
+                  </p>
+                  <p className="text-2xl font-bold text-emerald-400">200</p>
+                  {/* <p className="text-xs text-emerald-300/70 mt-1">
+                    Maximum Capacity
+                  </p> */}
                 </div>
               </div>
             </div>

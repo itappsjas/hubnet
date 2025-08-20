@@ -16,7 +16,7 @@ export default function DashboardPage() {
 
         {/* Airline Cargo Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
-          {/* Qatar Airways */}
+            {/* Qatar Airways */}
           <Link
             href="/airline_detail?airline=QR"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-orange-500/90 via-orange-600/90 to-orange-700/90 backdrop-blur-sm border border-orange-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
@@ -79,6 +79,9 @@ export default function DashboardPage() {
               </div>
             </div>
           </Link>
+
+
+
 
           {/* Nam Air */}
           <Link
