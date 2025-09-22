@@ -156,9 +156,12 @@ function AirlineDetailContent() {
 
         {/* Main Content - Enhanced Layout */}
         <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 pb-6">
-          {/* Kiri - Enhanced Cargo Visual */}
-          <div className="lg:col-span-5 flex flex-col space-y-6">
+          {/* Kiri - Modern Cargo Visual */}
+          <div className="lg:col-span-5 flex flex-col space-y-10">
             <div className="relative">
+              {/* Soft Animated Gradient Background */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-purple-500/10 to-cyan-500/10 rounded-3xl blur-3xl animate-[pulse_8s_ease-in-out_infinite]" />
+
               {/* Multiple Animated Background Layers */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
               <div className="absolute inset-0 bg-gradient-to-l from-green-500/5 via-blue-500/5 to-indigo-500/5 rounded-full blur-2xl animate-pulse delay-500"></div>
@@ -173,8 +176,8 @@ function AirlineDetailContent() {
                   <Image
                     src="/box.png"
                     alt="Cargo Boxes"
-                    width={380}
-                    height={280}
+                    width={280}
+                    height={180}
                     className="object-contain drop-shadow-2xl transition-transform duration-300 group-hover:scale-105"
                   />
                   {/* Glow Effect */}
@@ -182,63 +185,108 @@ function AirlineDetailContent() {
                 </div>
               </div>
 
-              {/* Enhanced Stats Grid */}
-              <div className="grid grid-cols-3 gap-4 mt-6">
-                <div className="group relative bg-gradient-to-br from-blue-500/10 to-blue-600/5 backdrop-blur-md rounded-xl border border-blue-500/20 p-5 hover:border-blue-400/40 transition-all duration-300">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="relative text-center">
-                    {/* <div className="flex items-center justify-center mb-2">
-                      <div className="w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center">
-                        <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
-                      </div>
-                    </div> */}
-                    {/* <p className="text-xs text-blue-300 font-medium">Total Weight</p> */}
-                    <p className="text-xl font-bold text-blue-400 mt-1">
-                      {cargoSummary.totalWeight}
-                    </p>
-                  </div>
-                </div>
+              {/* Stats Grid */}
+              <div className="grid grid-cols-3 gap-4">
+                {[
+                  {
+                    label: "Total Weight",
+                    value: cargoSummary.totalWeight,
+                    gradient: "from-blue-500/20 to-blue-600/10",
+                    border: "border-blue-400/30",
+                    glow: "shadow-blue-500/20",
+                  },
+                  {
+                    label: "Total Pieces",
+                    value: cargoSummary.totalPieces,
+                    gradient: "from-green-500/20 to-green-600/10",
+                    border: "border-green-400/30",
+                    glow: "shadow-green-500/20",
+                  },
+                  {
+                    label: "AWB Count",
+                    value: cargoSummary.totalAWB,
+                    gradient: "from-yellow-500/20 to-yellow-600/10",
+                    border: "border-yellow-400/30",
+                    glow: "shadow-yellow-500/20",
+                  },
+                ].map((stat, idx) => (
+                  <div
+                    key={idx}
+                    className={`group relative bg-gradient-to-br ${stat.gradient} backdrop-blur-xl rounded-2xl border ${stat.border} p-4 hover:border-white/40 hover:shadow-lg hover:${stat.glow} hover:scale-105 transition-all duration-300 cursor-pointer`}
+                  >
+                    {/* Subtle animated background */}
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-r ${stat.gradient} rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300`}
+                    ></div>
 
-                <div className="group relative bg-gradient-to-br from-green-500/10 to-green-600/5 backdrop-blur-md rounded-2xl border border-green-500/20 p-4 hover:border-green-400/40 transition-all duration-300">
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="relative text-center">
-                    {/* <div className="flex items-center justify-center mb-2">
-                      <div className="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center">
-                        <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                      </div>
-                    </div> */}
-                    {/* <p className="text-xs text-green-300 font-medium">Total Pieces</p> */}
-                    <p className="text-xl font-bold text-green-400 mt-1">
-                      {cargoSummary.totalPieces}
-                    </p>
-                  </div>
-                </div>
+                    <div className="text-center">
+                      {/* Enhanced Value */}
+                      <p className="text-2xl font-bold text-white mb-1 group-hover:text-white transition-colors duration-300">
+                        {stat.value}
+                      </p>
+                      {/* Enhanced Label */}
+                      <p className="text-xs text-gray-400">{stat.label}</p>
+                    </div>
 
-                <div className="group relative bg-gradient-to-br from-yellow-500/10 to-yellow-600/5 backdrop-blur-md rounded-2xl border border-yellow-500/20 p-4 hover:border-yellow-400/40 transition-all duration-300">
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="relative text-center">
-                    {/* <div className="flex items-center justify-center mb-2">
-                      <div className="w-8 h-8 bg-yellow-500/20 rounded-full flex items-center justify-center">
-                        <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                      </div>
-                    </div> */}
-                    {/* <p className="text-xs text-yellow-300 font-medium">AWB Count</p> */}
-                    <p className="text-xl font-bold text-yellow-400 mt-1">
-                      {cargoSummary.totalAWB}
-                    </p>
+                    {/* Subtle corner accent */}
+                    <div
+                      className={`absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-gradient-to-r ${stat.gradient} opacity-50 group-hover:opacity-100 transition-opacity duration-300`}
+                    ></div>
                   </div>
-                </div>
+                ))}
               </div>
 
-              {/* Enhanced Tracking Info */}
-              <div className="flex justify-center mt-8">
-                <div className="bg-gradient-to-r from-gray-800/50 to-gray-700/50 backdrop-blur-md px-6 py-3 rounded-2xl border border-gray-600/30">
-                  <p className="text-sm text-gray-300 font-mono text-center">
-                    🔍 123456788919
-                  </p>
-                  <p className="text-xs text-gray-400 text-center mt-1">
-                    14 AUG 2025 11:16:21
-                  </p>
+              {/* Passenger Information */}
+              <div className="relative bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-white/10 p-6 mt-8">
+                <h3 className="text-lg font-bold text-white flex items-center space-x-2 mb-6">
+                  <span className="flex items-center justify-center w-9 h-9 rounded-full bg-slate-600/40 border border-white/10 text-lg">
+                    👥
+                  </span>
+                  <span>Passenger Information</span>
+                </h3>
+                <div className="grid grid-cols-3 gap-5">
+                  {[
+                    {
+                      label: "PCF",
+                      value: "87.5%",
+                      color: "blue",
+                      icon: "📊",
+                    },
+                    {
+                      label: "Total Seat",
+                      value: "175",
+                      color: "blue",
+                      icon: "💺",
+                    },
+                    {
+                      label: "Total Pax/Flight",
+                      value: "200",
+                      color: "blue",
+                      icon: "🧳",
+                    },
+                  ].map((info, idx) => (
+                    <div
+                      key={idx}
+                      className="group relative bg-slate-900/40 rounded-xl border border-white/10 p-5 hover:border-white/20 hover:shadow-lg hover:shadow-slate-900/30 transition-all duration-300"
+                    >
+                      <div className="flex items-center space-x-3">
+                        {/* Icon */}
+                        <div
+                          className={`flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-${info.color}-500/20 to-${info.color}-600/10 text-lg`}
+                        >
+                          {info.icon}
+                        </div>
+                        <div>
+                          {/* Value */}
+                          <p className="text-xl font-bold text-white">
+                            {info.value}
+                          </p>
+                          {/* Label */}
+                          <p className="text-xs text-gray-400">{info.label}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -247,20 +295,23 @@ function AirlineDetailContent() {
           {/* Kanan - Enhanced AWB Details */}
           <div className="lg:col-span-7 flex flex-col space-y-6">
             {/* Enhanced Header */}
-            <div className="relative bg-gradient-to-r from-slate-800/30 to-slate-700/30 backdrop-blur-sm rounded-2xl border border-white/10 p-6">
+            <div className="relative bg-gradient-to-r from-slate-800/40 to-slate-700/40 backdrop-blur-md rounded-2xl border border-white/10 p-6 shadow-lg shadow-black/30">
               <div className="relative flex flex-col space-y-4">
                 {/* Header with Title and Status */}
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="text-xl font-bold text-white">
-                      ✈️ Flight Information
+                    <h3 className="text-lg font-bold text-white flex items-center space-x-2">
+                      <span className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-600/30 border border-white/10 text-xl">
+                        ✈️
+                      </span>
+                      <span>Flight Information</span>
                     </h3>
-                    <div className="flex items-center mt-2 space-x-2">
-                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-400 border border-yellow-500/30">
+                    <div className="flex items-center mt-3 space-x-2">
+                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-300 border border-yellow-500/30 shadow-[0_0_8px_rgba(255,200,0,0.2)]">
                         🔄 {cargoSummary.status}
                       </span>
-                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-400 border border-blue-500/30">
-                        🌐 Domestic
+                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-cyan-300 border border-cyan-500/30 shadow-[0_0_8px_rgba(0,200,255,0.2)]">
+                        🌐 International
                       </span>
                     </div>
                   </div>
@@ -272,8 +323,8 @@ function AirlineDetailContent() {
                       </span>
                     </p>
                     <p className="text-sm text-gray-400 mt-1">
-                      🕒 ETD:{" "}
-                      <span className="text-green-400 font-semibold">
+                      🕒 ETA:{" "}
+                      <span className="text-white font-medium">
                         {cargoSummary.estimatedDeparture}
                       </span>
                     </p>
@@ -284,8 +335,9 @@ function AirlineDetailContent() {
                 <div className="flex items-center justify-between mt-6 px-6">
                   {/* Departure */}
                   <div className="text-center">
-                    <p className="text-sm font-semibold text-cyan-400">HKG</p>
+                    <p className="text-lg font-bold text-cyan-400">HKG</p>
                     <p className="text-xs text-gray-400 mt-1">Hong Kong</p>
+                    <p className="text-xs text-gray-500 mt-1">STD</p>
                   </div>
 
                   {/* Flight Path */}
@@ -297,27 +349,27 @@ function AirlineDetailContent() {
                     >
                       {/* Main curved dashed line */}
                       <path
-                        d="M0,32 Q50,4 100,32"
+                        d="M0,12 Q50,-8 100,12"
                         stroke="url(#mainGradient)"
                         strokeWidth="1.5"
-                        strokeDasharray="1.5 3.5"
+                        strokeDasharray="4 6"
                         strokeLinecap="round"
                         fill="transparent"
+                        className="animate-[dashmove_6s_linear_infinite]"
                       />
 
-                      {/* Subtle accent underlay */}
+                      {/* Accent underlay */}
                       <path
-                        d="M0,32 Q50,4 100,32"
+                        d="M0,12 Q50,-8 100,12"
                         stroke="url(#accentGradient)"
-                        strokeWidth="0.8"
-                        strokeDasharray="1 6"
+                        strokeWidth="1"
+                        strokeDasharray="2 8"
                         strokeLinecap="round"
                         fill="transparent"
-                        className="opacity-50"
+                        className="opacity-40"
                       />
 
                       <defs>
-                        {/* Main line gradient */}
                         <linearGradient
                           id="mainGradient"
                           x1="0%"
@@ -341,8 +393,6 @@ function AirlineDetailContent() {
                             stopOpacity="0.9"
                           />
                         </linearGradient>
-
-                        {/* Accent gradient */}
                         <linearGradient
                           id="accentGradient"
                           x1="0%"
@@ -353,30 +403,30 @@ function AirlineDetailContent() {
                           <stop
                             offset="0%"
                             stopColor="#06b6d4"
-                            stopOpacity="0.4"
+                            stopOpacity="0.3"
                           />
                           <stop
                             offset="50%"
                             stopColor="#ffffff"
-                            stopOpacity="0.6"
+                            stopOpacity="0.5"
                           />
                           <stop
                             offset="100%"
                             stopColor="#06b6d4"
-                            stopOpacity="0.4"
+                            stopOpacity="0.3"
                           />
                         </linearGradient>
                       </defs>
                     </svg>
 
                     {/* Plane & duration */}
-                    <div className="absolute top-6 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div className="absolute top-5 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                       <div className="relative flex flex-col items-center">
-                        <span className="text-white text-xl transform rotate-[25deg] drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]">
+                        <span className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-800/70 border border-cyan-400/30 text-xl transform rotate-[25deg] shadow-[0_0_12px_rgba(0,255,255,0.3)]">
                           ✈️
                         </span>
-                        <p className="mt-2 text-xs text-cyan-300 font-medium bg-slate-900/70 px-3 py-0.5 rounded-full border border-cyan-500/20 backdrop-blur-sm whitespace-nowrap">
-                          901.35 km • 2h 45m
+                        <p className="mt-2 text-xs text-cyan-300 font-medium bg-slate-900/70 px-3 py-0.5 rounded-full border border-cyan-500/20 backdrop-blur-sm whitespace-nowrap shadow-sm">
+                          3.257 km • 5h 4m
                         </p>
                       </div>
                     </div>
@@ -384,17 +434,37 @@ function AirlineDetailContent() {
 
                   {/* Arrival */}
                   <div className="text-center">
-                    <p className="text-sm font-semibold text-cyan-400">CGK</p>
+                    <p className="text-lg font-bold text-cyan-400">CGK</p>
                     <p className="text-xs text-gray-400 mt-1">Jakarta</p>
+                    <p className="text-xs text-gray-500 mt-1">STA</p>
                   </div>
                 </div>
               </div>
             </div>
+            <style>
+              {`      
+  @keyframes dashmove {
+    to {
+      stroke-dashoffset: -1000;
+    }
+  }
+  
+  path {
+  stroke-dasharray: 2, 2;
+  stroke-dashoffset: 0;
+  animation: dashmove 150s linear infinite;
+}
+`}
+            </style>
 
+            {/* AWB Details Section */}
             <div className="flex-1 relative bg-gradient-to-br from-slate-800/20 to-slate-900/20 backdrop-blur-sm rounded-2xl border border-white/10 p-4">
               <div className="relative flex items-center justify-between mb-4">
-                <h4 className="text-lg font-bold text-white flex items-center">
-                  📋 Air Waybill Details
+                <h4 className="text-lg font-bold text-white flex items-center space-x-2">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-700/40 border border-white/10">
+                    📋
+                  </span>
+                  <span>Air Waybill Details</span>
                 </h4>
                 <div className="bg-gradient-to-r from-indigo-500/15 to-purple-500/15 backdrop-blur-sm px-3 py-1 rounded-lg border border-indigo-500/30">
                   <p className="text-xs text-indigo-300 font-mono">
@@ -423,7 +493,7 @@ function AirlineDetailContent() {
                           📦 {awb.description}
                         </p>
                       </div>
-                      <span
+                      {/* <span
                         className={`px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm border transition-all duration-300 ${
                           awb.status === "Loaded"
                             ? "bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-400 border-green-500/30"
@@ -431,7 +501,7 @@ function AirlineDetailContent() {
                         }`}
                       >
                         {awb.status === "Loaded" ? "✅" : "⏳"} {awb.status}
-                      </span>
+                      </span> */}
                     </div>
 
                     <div className="grid grid-cols-3 gap-3">
@@ -447,59 +517,20 @@ function AirlineDetailContent() {
                           {awb.pieces}
                         </p>
                       </div>
-                      <div className="text-center p-2 bg-purple-500/10 rounded-lg border border-purple-500/20">
-                        <p className="text-purple-300 text-xs mb-1">
-                          📈 Progress
-                        </p>
-                        <div className="w-full bg-gray-700/50 rounded-full h-1.5 mt-1">
-                          <div
-                            className={`h-1.5 rounded-full transition-all duration-500 ${
-                              awb.status === "Loaded"
-                                ? "bg-gradient-to-r from-green-500 to-emerald-400"
-                                : "bg-gradient-to-r from-yellow-500 to-orange-400"
-                            }`}
-                            style={{
-                              width: awb.status === "Loaded" ? "100%" : "75%",
-                            }}
-                          ></div>
-                        </div>
+                      <div className="flex items-center justify-center p-2 bg-purple-500/10 rounded-lg border border-purple-500/20">
+                        <span
+                          className={`px-2 py-1 rounded-full text-xs font-semibold transition-all duration-300 ${
+                            awb.status === "Loaded"
+                              ? "bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-400 border border-green-500/30"
+                              : "bg-gradient-to-r from-red-500/20 to-red-600/20 text-red-400 border border-red-500/30"
+                          }`}
+                        >
+                          {awb.status === "Loaded" ? "Completed" : "Not Send"}
+                        </span>
                       </div>
                     </div>
                   </div>
                 ))}
-              </div>
-            </div>
-            {/* Product Details Section */}
-            <div className="relative bg-gradient-to-r from-slate-800/30 to-slate-700/30 backdrop-blur-sm rounded-2xl border border-white/10 p-6">
-              <h4 className="text-lg font-bold text-white flex items-center mb-4">
-                📦 Product Details
-              </h4>
-              <div className="grid grid-cols-3 gap-6">
-                <div className="text-center p-4 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 rounded-xl border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300">
-                  <p className="text-purple-300 text-sm mb-2">✈️ PCF</p>
-                  <p className="text-2xl font-bold text-purple-400">87.5%</p>
-                  {/* <p className="text-xs text-purple-300/70 mt-1">
-                    Passenger Capacity Factor
-                  </p> */}
-                </div>
-                <div className="text-center p-4 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-xl border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300">
-                  <p className="text-blue-300 text-sm mb-2">
-                    👥 Total Passenger
-                  </p>
-                  <p className="text-2xl font-bold text-blue-400">175</p>
-                  {/* <p className="text-xs text-blue-300/70 mt-1">
-                    Current Passengers
-                  </p> */}
-                </div>
-                <div className="text-center p-4 bg-gradient-to-br from-emerald-500/10 to-green-500/10 rounded-xl border border-emerald-500/20 hover:border-emerald-400/40 transition-all duration-300">
-                  <p className="text-emerald-300 text-sm mb-2">
-                    🛫 Total Pax/Flight
-                  </p>
-                  <p className="text-2xl font-bold text-emerald-400">200</p>
-                  {/* <p className="text-xs text-emerald-300/70 mt-1">
-                    Maximum Capacity
-                  </p> */}
-                </div>
               </div>
             </div>
           </div>

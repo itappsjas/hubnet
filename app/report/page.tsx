@@ -43,76 +43,88 @@ export default function DashboardPage() {
         <PageHeader title="📦 AWB SENT TO HUBNET" />
 
         {/* Filter Section */}
-        <div className="mb-6 p-4 rounded-lg shadow-md">
+        <div className="mb-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* Station Filter */}
-            <div>
+            <div className="bg-slate-800/40 backdrop-blur-md rounded-xl border border-white/10 p-4 hover:border-white/20 transition-all duration-300">
               <label
                 htmlFor="station"
-                className="block text-base font-medium text-yellow-500"
+                className="block text-base font-medium text-yellow-500 flex items-center gap-2"
               >
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-700/40 border border-yellow-500/20">
+                  🏢
+                </span>
                 Station
               </label>
               <select
                 id="station"
-                className="mt-1 block w-full text-base h-12 px-4 py-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-3 block w-full text-base h-12 px-4 py-2 bg-slate-900/50 border-slate-700 text-white rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500 transition-colors duration-200"
               >
                 <option value="">Select Station</option>
               </select>
             </div>
 
             {/* Airline Filter */}
-            <div>
+            <div className="bg-slate-800/40 backdrop-blur-md rounded-xl border border-white/10 p-4 hover:border-white/20 transition-all duration-300">
               <label
                 htmlFor="airline"
-                className="block text-base font-medium text-yellow-500"
+                className="block text-base font-medium text-yellow-400 flex items-center gap-2"
               >
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-700/40 border border-yellow-500/20">
+                  ✈️
+                </span>
                 Airline
               </label>
               <select
                 id="airline"
-                className="mt-1 block w-full text-base h-12 px-4 py-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-3 block w-full text-base h-12 px-4 py-2 bg-slate-900/50 border-slate-700 text-white rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500 transition-colors duration-200"
               >
                 <option value="">Select Airline</option>
               </select>
             </div>
 
             {/* Date From Filter */}
-            <div>
+            <div className="bg-slate-800/40 backdrop-blur-md rounded-xl border border-white/10 p-4 hover:border-white/20 transition-all duration-300">
               <label
                 htmlFor="dateFrom"
-                className="block text-base font-medium text-yellow-500"
+                className="block text-base font-medium text-yellow-400 flex items-center gap-2"
               >
-                Date From<span className="text-red-500"> *</span>
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-700/40 border border-yellow-500/20">
+                  📅
+                </span>
+                Date From<span className="text-red-400 ml-1">*</span>
               </label>
               <input
                 type="date"
                 id="dateFrom"
                 required
-                className="mt-1 block w-full text-base h-12 px-4 py-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-3 block w-full text-base h-12 px-4 py-2 bg-slate-900/50 border-slate-700 text-white rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500 transition-colors duration-200"
               />
             </div>
 
             {/* Date To Filter */}
-            <div>
+            <div className="bg-slate-800/40 backdrop-blur-md rounded-xl border border-white/10 p-4 hover:border-white/20 transition-all duration-300">
               <label
                 htmlFor="dateTo"
-                className="block text-base font-medium text-yellow-500"
+                className="block text-base font-medium text-yellow-400 flex items-center gap-2"
               >
-                Date To<span className="text-red-500"> *</span>
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-700/40 border border-yellow-500/20">
+                  📅
+                </span>
+                Date To<span className="text-red-400 ml-1">*</span>
               </label>
               <input
                 type="date"
                 id="dateTo"
                 required
-                className="mt-1 block w-full text-base h-12 px-4 py-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-3 block w-full text-base h-12 px-4 py-2 bg-slate-900/50 border-slate-700 text-white rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500 transition-colors duration-200"
               />
             </div>
           </div>
         </div>
 
         {/* Generate Report Button */}
-        <div className="mb-6 flex justify-end">
+        <div className="mb-6 flex justify-start">
           <button
             type="button"
             className="relative inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-yellow-500 rounded-lg shadow-md hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:ring-offset-2 transition-all duration-200"

@@ -82,7 +82,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Filter Section */}
-        <div className="mb-6 p-4 rounded-lg shadow-md">
+        <div className="mb-6 p-4 rounded-lg shadow-md border border-white/15">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* Station Filter */}
             <div>
