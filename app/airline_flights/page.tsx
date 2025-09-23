@@ -28,16 +28,16 @@ const flightData: any = {
     {
       flightNumber: "QR-8834",
       route: "DOH-CGK",
-      cargo: { weight: "2.45T", pieces: "2,450", volume: "2.45m³" },
+      cargo: { weight: "2.45T", pieces: "2,450Pcs", volume: "2.45m³" },
       pax: { capacity: 350, booked: 298, loadFactor: "85%" },
-      status: "On Time",
+      status: "Send",
       etd: "14:30",
       eta: "02:15+1",
     },
     {
       flightNumber: "QR-8836",
       route: "DOH-CGK",
-      cargo: { weight: "3.2T", pieces: "3,200", volume: "3.2m³" },
+      cargo: { weight: "3.2T", pieces: "3,200Pcs", volume: "3.2m³" },
       pax: { capacity: 350, booked: 312, loadFactor: "89%" },
       status: "Delayed",
       etd: "18:45",
@@ -46,25 +46,25 @@ const flightData: any = {
     {
       flightNumber: "QR-8838",
       route: "DOH-CGK",
-      cargo: { weight: "1.8T", pieces: "1,800", volume: "1.8m³" },
+      cargo: { weight: "1.8T", pieces: "1,800Pcs", volume: "1.8m³" },
       pax: { capacity: 350, booked: 280, loadFactor: "80%" },
-      status: "Boarding",
+      status: "Send",
       etd: "10:15",
       eta: "22:45",
     },
     {
       flightNumber: "QR-8840",
       route: "DOH-CGK",
-      cargo: { weight: "4.1T", pieces: "4,100", volume: "4.1m³" },
+      cargo: { weight: "4.1T", pieces: "4,100Pcs", volume: "4.1m³" },
       pax: { capacity: 350, booked: 335, loadFactor: "96%" },
-      status: "On Time",
+      status: "Send",
       etd: "22:30",
       eta: "11:15+1",
     },
     {
       flightNumber: "QR-8842",
       route: "DOH-CGK",
-      cargo: { weight: "2.9T", pieces: "2,900", volume: "2.9m³" },
+      cargo: { weight: "2.9T", pieces: "2,900Pcs", volume: "2.9m³" },
       pax: { capacity: 350, booked: 245, loadFactor: "70%" },
       status: "Delayed",
       etd: "06:20",
@@ -73,34 +73,34 @@ const flightData: any = {
     {
       flightNumber: "QR-8844",
       route: "DOH-CGK",
-      cargo: { weight: "3.5T", pieces: "3,500", volume: "3.5m³" },
+      cargo: { weight: "3.5T", pieces: "3,500Pcs", volume: "3.5m³" },
       pax: { capacity: 350, booked: 298, loadFactor: "85%" },
-      status: "On Time",
+      status: "Send",
       etd: "16:45",
       eta: "05:20+1",
     },
     {
       flightNumber: "QR-8846",
       route: "DOH-CGK",
-      cargo: { weight: "2.1T", pieces: "2,100", volume: "2.1m³" },
+      cargo: { weight: "2.1T", pieces: "2,100Pcs", volume: "2.1m³" },
       pax: { capacity: 350, booked: 267, loadFactor: "76%" },
-      status: "Boarding",
+      status: "Send",
       etd: "12:10",
       eta: "00:45+1",
     },
     {
       flightNumber: "QR-8848",
       route: "DOH-CGK",
-      cargo: { weight: "3.8T", pieces: "3,800", volume: "3.8m³" },
+      cargo: { weight: "3.8T", pieces: "3,800Pcs", volume: "3.8m³" },
       pax: { capacity: 350, booked: 320, loadFactor: "91%" },
-      status: "On Time",
+      status: "Send",
       etd: "20:15",
       eta: "08:50+1",
     },
     {
       flightNumber: "QR-8850",
       route: "DOH-CGK",
-      cargo: { weight: "1.6T", pieces: "1,600", volume: "1.6m³" },
+      cargo: { weight: "1.6T", pieces: "1,600Pcs", volume: "1.6m³" },
       pax: { capacity: 350, booked: 195, loadFactor: "56%" },
       status: "Delayed",
       etd: "08:30",
@@ -109,27 +109,27 @@ const flightData: any = {
     {
       flightNumber: "QR-8852",
       route: "DOH-CGK",
-      cargo: { weight: "4.5T", pieces: "4,500", volume: "4.5m³" },
+      cargo: { weight: "4.5T", pieces: "4,500Pcs", volume: "4.5m³" },
       pax: { capacity: 350, booked: 342, loadFactor: "98%" },
-      status: "On Time",
+      status: "Send",
       etd: "04:45",
       eta: "17:20",
     },
     {
       flightNumber: "QR-8854",
       route: "DOH-CGK",
-      cargo: { weight: "2.7T", pieces: "2,700", volume: "2.7m³" },
+      cargo: { weight: "2.7T", pieces: "2,700Pcs", volume: "2.7m³" },
       pax: { capacity: 350, booked: 289, loadFactor: "83%" },
-      status: "Boarding",
+      status: "Send",
       etd: "13:20",
       eta: "01:55+1",
     },
     {
       flightNumber: "QR-8856",
       route: "DOH-CGK",
-      cargo: { weight: "3.3T", pieces: "3,300", volume: "3.3m³" },
+      cargo: { weight: "3.3T", pieces: "3,300Pcs", volume: "3.3m³" },
       pax: { capacity: 350, booked: 301, loadFactor: "86%" },
-      status: "On Time",
+      status: "Send",
       etd: "19:00",
       eta: "07:35+1",
     },
@@ -138,16 +138,16 @@ const flightData: any = {
     {
       flightNumber: "IN-7239",
       route: "CGK-DPS",
-      cargo: { weight: "1.85T", pieces: "1,850", volume: "1.85m³" },
+      cargo: { weight: "1.85T", pieces: "1,850Pcs", volume: "1.85m³" },
       pax: { capacity: 180, booked: 165, loadFactor: "92%" },
-      status: "On Time",
+      status: "Send",
       etd: "09:15",
       eta: "12:30",
     },
     {
       flightNumber: "IN-7241",
       route: "CGK-DPS",
-      cargo: { weight: "2.1T", pieces: "2,100", volume: "2.1m³" },
+      cargo: { weight: "2.1T", pieces: "2,100Pcs", volume: "2.1m³" },
       pax: { capacity: 180, booked: 172, loadFactor: "96%" },
       status: "Delayed",
       etd: "15:20",
@@ -156,34 +156,34 @@ const flightData: any = {
     {
       flightNumber: "IN-7243",
       route: "CGK-DPS",
-      cargo: { weight: "1.6T", pieces: "1,600", volume: "1.6m³" },
+      cargo: { weight: "1.6T", pieces: "1,600Pcs", volume: "1.6m³" },
       pax: { capacity: 180, booked: 145, loadFactor: "81%" },
-      status: "On Time",
+      status: "Send",
       etd: "11:40",
       eta: "14:55",
     },
     {
       flightNumber: "IN-7245",
       route: "CGK-DPS",
-      cargo: { weight: "2.3T", pieces: "2,300", volume: "2.3m³" },
+      cargo: { weight: "2.3T", pieces: "2,300Pcs", volume: "2.3m³" },
       pax: { capacity: 180, booked: 167, loadFactor: "93%" },
-      status: "Boarding",
+      status: "Send",
       etd: "07:25",
       eta: "10:40",
     },
     {
       flightNumber: "IN-7247",
       route: "CGK-DPS",
-      cargo: { weight: "1.9T", pieces: "1,900", volume: "1.9m³" },
+      cargo: { weight: "1.9T", pieces: "1,900Pcs", volume: "1.9m³" },
       pax: { capacity: 180, booked: 158, loadFactor: "88%" },
-      status: "On Time",
+      status: "Send",
       etd: "17:10",
       eta: "20:25",
     },
     {
       flightNumber: "IN-7249",
       route: "CGK-DPS",
-      cargo: { weight: "2.5T", pieces: "2,500", volume: "2.5m³" },
+      cargo: { weight: "2.5T", pieces: "2,500Pcs", volume: "2.5m³" },
       pax: { capacity: 180, booked: 175, loadFactor: "97%" },
       status: "Delayed",
       etd: "13:55",
@@ -192,34 +192,34 @@ const flightData: any = {
     {
       flightNumber: "IN-7251",
       route: "CGK-DPS",
-      cargo: { weight: "1.4T", pieces: "1,400", volume: "1.4m³" },
+      cargo: { weight: "1.4T", pieces: "1,400Pcs", volume: "1.4m³" },
       pax: { capacity: 180, booked: 132, loadFactor: "73%" },
-      status: "On Time",
+      status: "Send",
       etd: "06:30",
       eta: "09:45",
     },
     {
       flightNumber: "IN-7253",
       route: "CGK-DPS",
-      cargo: { weight: "2.0T", pieces: "2,000", volume: "2.0m³" },
+      cargo: { weight: "2.0T", pieces: "2,000Pcs", volume: "2.0m³" },
       pax: { capacity: 180, booked: 161, loadFactor: "89%" },
-      status: "Boarding",
+      status: "Send",
       etd: "19:45",
       eta: "23:00",
     },
     {
       flightNumber: "IN-7255",
       route: "CGK-DPS",
-      cargo: { weight: "1.7T", pieces: "1,700", volume: "1.7m³" },
+      cargo: { weight: "1.7T", pieces: "1,700Pcs", volume: "1.7m³" },
       pax: { capacity: 180, booked: 149, loadFactor: "83%" },
-      status: "On Time",
+      status: "Send",
       etd: "12:15",
       eta: "15:30",
     },
     {
       flightNumber: "IN-7257",
       route: "CGK-DPS",
-      cargo: { weight: "2.2T", pieces: "2,200", volume: "2.2m³" },
+      cargo: { weight: "2.2T", pieces: "2,200Pcs", volume: "2.2m³" },
       pax: { capacity: 180, booked: 168, loadFactor: "93%" },
       status: "Delayed",
       etd: "16:00",
@@ -228,18 +228,18 @@ const flightData: any = {
     {
       flightNumber: "IN-7259",
       route: "CGK-DPS",
-      cargo: { weight: "1.8T", pieces: "1,800", volume: "1.8m³" },
+      cargo: { weight: "1.8T", pieces: "1,800Pcs", volume: "1.8m³" },
       pax: { capacity: 180, booked: 155, loadFactor: "86%" },
-      status: "On Time",
+      status: "Send",
       etd: "08:50",
       eta: "12:05",
     },
     {
       flightNumber: "IN-7261",
       route: "CGK-DPS",
-      cargo: { weight: "2.4T", pieces: "2,400", volume: "2.4m³" },
+      cargo: { weight: "2.4T", pieces: "2,400Pcs", volume: "2.4m³" },
       pax: { capacity: 180, booked: 173, loadFactor: "96%" },
-      status: "Boarding",
+      status: "Send",
       etd: "14:35",
       eta: "17:50",
     },
@@ -248,34 +248,34 @@ const flightData: any = {
     {
       flightNumber: "SQ-955",
       route: "SIN-CGK",
-      cargo: { weight: "4.2T", pieces: "4,200", volume: "4.2m³" },
+      cargo: { weight: "4.2T", pieces: "4,200Pcs", volume: "4.2m³" },
       pax: { capacity: 280, booked: 251, loadFactor: "90%" },
-      status: "Boarding",
+      status: "Send",
       etd: "11:20",
       eta: "12:45",
     },
     {
       flightNumber: "SQ-957",
       route: "SIN-CGK",
-      cargo: { weight: "3.8T", pieces: "3,800", volume: "3.8m³" },
+      cargo: { weight: "3.8T", pieces: "3,800Pcs", volume: "3.8m³" },
       pax: { capacity: 280, booked: 268, loadFactor: "96%" },
-      status: "On Time",
+      status: "Send",
       etd: "16:10",
       eta: "17:35",
     },
     {
       flightNumber: "SQ-959",
       route: "SIN-CGK",
-      cargo: { weight: "5.1T", pieces: "5,100", volume: "5.1m³" },
+      cargo: { weight: "5.1T", pieces: "5,100Pcs", volume: "5.1m³" },
       pax: { capacity: 280, booked: 275, loadFactor: "98%" },
-      status: "On Time",
+      status: "Send",
       etd: "09:30",
       eta: "10:55",
     },
     {
       flightNumber: "SQ-961",
       route: "SIN-CGK",
-      cargo: { weight: "3.5T", pieces: "3,500", volume: "3.5m³" },
+      cargo: { weight: "3.5T", pieces: "3,500Pcs", volume: "3.5m³" },
       pax: { capacity: 280, booked: 234, loadFactor: "84%" },
       status: "Delayed",
       etd: "14:45",
@@ -284,34 +284,34 @@ const flightData: any = {
     {
       flightNumber: "SQ-963",
       route: "SIN-CGK",
-      cargo: { weight: "4.7T", pieces: "4,700", volume: "4.7m³" },
+      cargo: { weight: "4.7T", pieces: "4,700Pcs", volume: "4.7m³" },
       pax: { capacity: 280, booked: 261, loadFactor: "93%" },
-      status: "Boarding",
+      status: "Send",
       etd: "07:15",
       eta: "08:40",
     },
     {
       flightNumber: "SQ-965",
       route: "SIN-CGK",
-      cargo: { weight: "3.2T", pieces: "3,200", volume: "3.2m³" },
+      cargo: { weight: "3.2T", pieces: "3,200Pcs", volume: "3.2m³" },
       pax: { capacity: 280, booked: 198, loadFactor: "71%" },
-      status: "On Time",
+      status: "Send",
       etd: "19:25",
       eta: "20:50",
     },
     {
       flightNumber: "SQ-967",
       route: "SIN-CGK",
-      cargo: { weight: "4.9T", pieces: "4,900", volume: "4.9m³" },
+      cargo: { weight: "4.9T", pieces: "4,900Pcs", volume: "4.9m³" },
       pax: { capacity: 280, booked: 272, loadFactor: "97%" },
-      status: "On Time",
+      status: "Send",
       etd: "13:40",
       eta: "15:05",
     },
     {
       flightNumber: "SQ-969",
       route: "SIN-CGK",
-      cargo: { weight: "2.8T", pieces: "2,800", volume: "2.8m³" },
+      cargo: { weight: "2.8T", pieces: "2,800Pcs", volume: "2.8m³" },
       pax: { capacity: 280, booked: 215, loadFactor: "77%" },
       status: "Delayed",
       etd: "21:55",
@@ -320,34 +320,34 @@ const flightData: any = {
     {
       flightNumber: "SQ-971",
       route: "SIN-CGK",
-      cargo: { weight: "4.4T", pieces: "4,400", volume: "4.4m³" },
+      cargo: { weight: "4.4T", pieces: "4,400Pcs", volume: "4.4m³" },
       pax: { capacity: 280, booked: 258, loadFactor: "92%" },
-      status: "Boarding",
+      status: "Send",
       etd: "05:50",
       eta: "07:15",
     },
     {
       flightNumber: "SQ-973",
       route: "SIN-CGK",
-      cargo: { weight: "3.9T", pieces: "3,900", volume: "3.9m³" },
+      cargo: { weight: "3.9T", pieces: "3,900Pcs", volume: "3.9m³" },
       pax: { capacity: 280, booked: 245, loadFactor: "88%" },
-      status: "On Time",
+      status: "Send",
       etd: "17:30",
       eta: "18:55",
     },
     {
       flightNumber: "SQ-975",
       route: "SIN-CGK",
-      cargo: { weight: "5.3T", pieces: "5,300", volume: "5.3m³" },
+      cargo: { weight: "5.3T", pieces: "5,300Pcs", volume: "5.3m³" },
       pax: { capacity: 280, booked: 278, loadFactor: "99%" },
-      status: "On Time",
+      status: "Send",
       etd: "12:05",
       eta: "13:30",
     },
     {
       flightNumber: "SQ-977",
       route: "SIN-CGK",
-      cargo: { weight: "3.1T", pieces: "3,100", volume: "3.1m³" },
+      cargo: { weight: "3.1T", pieces: "3,100Pcs", volume: "3.1m³" },
       pax: { capacity: 280, booked: 201, loadFactor: "72%" },
       status: "Delayed",
       etd: "15:20",
@@ -399,10 +399,12 @@ function AirlineFlightsContent() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "On Time":
+      case "Send":
         return "text-green-400 bg-green-500/20 border-green-500/30";
       case "Delayed":
         return "text-red-400 bg-red-500/20 border-red-500/30";
+      case "On Time":
+        return "text-green-400 bg-green-500/20 border-green-500/30";
       case "Boarding":
         return "text-yellow-400 bg-yellow-500/20 border-yellow-500/30";
       default:
@@ -600,7 +602,7 @@ function AirlineFlightsContent() {
                   %
                 </p>
                 <p className="text-xs text-gray-400 uppercase tracking-wide">
-                  Avg Load Factor
+                  Avg Boarding Rate
                 </p>
               </div>
             </div>
@@ -678,7 +680,7 @@ function AirlineFlightsContent() {
                     Schedule
                   </th>
                   <th className="text-left py-4 px-4 text-sm font-semibold text-gray-300 uppercase tracking-wide">
-                    Status
+                    Hubnet Status
                   </th>
                   <th className="text-left py-4 px-4 text-sm font-semibold text-gray-300 uppercase tracking-wide">
                     Action
@@ -721,7 +723,7 @@ function AirlineFlightsContent() {
                             {flight.pax.booked}/{flight.pax.capacity}
                           </div>
                           <div className="text-gray-400 text-xs">
-                            LF: {flight.pax.loadFactor}
+                            BR: {flight.pax.loadFactor}
                           </div>
                         </div>
                       </td>

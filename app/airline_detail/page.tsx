@@ -64,6 +64,7 @@ const airlineData: any = {
 function AirlineDetailContent() {
   const searchParams = useSearchParams();
   const airlineCode = searchParams.get("airline") || "QR";
+  const flightNumber = searchParams.get("flight") || "";
   const airline = airlineData[airlineCode] || airlineData["QR"];
   const airplaneImage = airlineAirplanes[airlineCode] || "QR.jpg";
 
@@ -138,8 +139,13 @@ function AirlineDetailContent() {
                   {airline.name}
                 </h1>
                 <p className="text-cyan-300 text-sm font-medium">
-                  Flight {airline.code} • Cargo Operations
-                </p>
+                  Flight
+                  {flightNumber ? ` - ${flightNumber}` : ""} • Cargo Operations
+                </p> 
+                {/* <p className="text-cyan-300 text-sm font-medium">
+                  Flight {airline.code}
+                  {flightNumber ? ` - ${flightNumber}` : ""} • Cargo Operations
+                </p> */}
               </div>
               <div className="text-right">
                 {/* <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20">
@@ -244,11 +250,18 @@ function AirlineDetailContent() {
                   </span>
                   <span>Passenger Information</span>
                 </h3>
+                <div className="mb-4">
+                  <div className="bg-gradient-to-r from-indigo-500/15 to-purple-500/15 backdrop-blur-sm px-3 py-1 rounded-lg border border-indigo-500/30 inline-block">
+                    <p className="text-xs text-indigo-300 font-mono">
+                      🔍 13348907654 (14 AUG 2025 11:16:21)
+                    </p>
+                  </div>
+                </div>
                 <div className="grid grid-cols-3 gap-5">
                   {[
                     {
                       label: "PCF",
-                      value: "87.5%",
+                      value: "0Kg",
                       color: "blue",
                       icon: "📊",
                     },
@@ -420,14 +433,17 @@ function AirlineDetailContent() {
                     </svg>
 
                     {/* Plane & duration */}
-                    <div className="absolute top-5 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <div className="relative flex flex-col items-center">
-                        <span className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-800/70 border border-cyan-400/30 text-xl transform rotate-[25deg] shadow-[0_0_12px_rgba(0,255,255,0.3)]">
-                          ✈️
+                    <div className="absolute top-5 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-fit flex flex-col items-center justify-center">
+                      <span className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-800/70 border border-cyan-400/30 text-xl transform rotate-[25deg] shadow-[0_0_12px_rgba(0,255,255,0.3)] mt-8">
+                        ✈️
+                      </span>
+                      <div className="flex flex-col items-center mt-5">
+                        <span className="text-xs text-cyan-300 font-medium bg-slate-900/70 px-3 py-0.5 rounded-full border border-cyan-500/20 backdrop-blur-sm whitespace-nowrap shadow-sm mb-1">
+                          6893.58 Km
                         </span>
-                        <p className="mt-2 text-xs text-cyan-300 font-medium bg-slate-900/70 px-3 py-0.5 rounded-full border border-cyan-500/20 backdrop-blur-sm whitespace-nowrap shadow-sm">
-                          3.257 km • 5h 4m
-                        </p>
+                        <span className="text-xs text-cyan-300 font-medium bg-slate-900/70 px-3 py-0.5 rounded-full border border-cyan-500/20 backdrop-blur-sm whitespace-nowrap shadow-sm">
+                          08 : 07
+                        </span>
                       </div>
                     </div>
                   </div>
