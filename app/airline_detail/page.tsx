@@ -139,9 +139,8 @@ function AirlineDetailContent() {
                   {airline.name}
                 </h1>
                 <p className="text-cyan-300 text-sm font-medium">
-                  Flight
-                  {flightNumber ? ` - ${flightNumber}` : ""} • Cargo Operations
-                </p> 
+                  {flightNumber ? `Flight • ${flightNumber}` : "Flight"}
+                </p>
                 {/* <p className="text-cyan-300 text-sm font-medium">
                   Flight {airline.code}
                   {flightNumber ? ` - ${flightNumber}` : ""} • Cargo Operations
