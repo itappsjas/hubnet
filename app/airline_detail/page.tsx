@@ -257,7 +257,7 @@ function AirlineDetailContent() {
                     </p>
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-5">
+                <div className="grid grid-cols-3 gap-2">
                   {[
                     {
                       label: "PCF",
@@ -272,7 +272,7 @@ function AirlineDetailContent() {
                       icon: "💺",
                     },
                     {
-                      label: "Total Pax/Flight",
+                      label: "Total Pax",
                       value: "200",
                       color: "blue",
                       icon: "🧳",
