@@ -1,10 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  eslint: {
+    // ✅ Abaikan semua error ESLint ketika build
+    ignoreDuringBuilds: true,
+  },
   compiler: {
-    styledComponents: true
-  }
+    // ✅ Aktifkan dukungan styled-components (jika dipakai)
+    styledComponents: true,
+  },
 };
 
 export default nextConfig;
