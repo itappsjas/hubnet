@@ -4,11 +4,19 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useState, useMemo } from "react";
 import Sidebar from "../components/Sidebar";
 import MobileNav from "../components/MobileNav";
-import PageHeader from "../components/PageHeader";
-import Image from "next/image";
 import Link from "next/link";
 
-const airlineData: any = {
+interface FlightData {
+  flightNumber: string;
+  route: string;
+  cargo: { weight: string; pieces: string; volume: string };
+  pax: { capacity: number; booked: number; loadFactor: string };
+  status: string;
+  etd: string;
+  eta: string;
+}
+
+const airlineData: { [key: string]: { name: string; code: string } } = {
   QR: { name: "Qatar Airways", code: "QR" },
   IN: { name: "Nam Air", code: "IN" },
   SQ: { name: "Singapore Airlines", code: "SQ" },
@@ -23,7 +31,7 @@ const airlineData: any = {
   NH: { name: "All Nippon Airways", code: "NH" },
 };
 
-const flightData: any = {
+const flightData: { [key: string]: FlightData[] } = {
   QR: [
     {
       flightNumber: "QR-8834",
@@ -371,7 +379,7 @@ function AirlineFlightsContent() {
   const filteredFlights = useMemo(() => {
     if (!searchTerm) return flights;
     return flights.filter(
-      (flight: any) =>
+      (flight: FlightData) =>
         flight.flightNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
         flight.route.toLowerCase().includes(searchTerm.toLowerCase()) ||
         flight.status.toLowerCase().includes(searchTerm.toLowerCase())
@@ -552,7 +560,7 @@ function AirlineFlightsContent() {
                 <p className="text-2xl font-bold text-white">
                   {flights
                     .reduce(
-                      (acc: number, flight: any) =>
+                      (acc: number, flight: FlightData) =>
                         acc + parseFloat(flight.cargo.weight.replace("T", "")),
                       0
                     )
@@ -569,12 +577,12 @@ function AirlineFlightsContent() {
           <div className="bg-slate-800/40 backdrop-blur-md rounded-xl border border-white/10 p-4">
             <div className="flex items-center gap-3">
               <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-yellow-500/20 text-yellow-400">
-                👥
+                👨‍👨‍👦‍👦
               </span>
               <div>
                 <p className="text-2xl font-bold text-white">
                   {flights.reduce(
-                    (acc: number, flight: any) => acc + flight.pax.booked,
+                    (acc: number, flight: FlightData) => acc + flight.pax.booked,
                     0
                   )}
                 </p>
@@ -594,7 +602,7 @@ function AirlineFlightsContent() {
                 <p className="text-2xl font-bold text-white">
                   {Math.round(
                     flights.reduce(
-                      (acc: number, flight: any) =>
+                      (acc: number, flight: FlightData) =>
                         acc + parseInt(flight.pax.loadFactor.replace("%", "")),
                       0
                     ) / flights.length
@@ -689,7 +697,7 @@ function AirlineFlightsContent() {
               </thead>
               <tbody>
                 {paginatedFlights.length > 0 ? (
-                  paginatedFlights.map((flight: any, index: number) => (
+                  paginatedFlights.map((flight: FlightData, index: number) => (
                     <tr
                       key={index}
                       className="border-b border-white/5 hover:bg-white/5 transition-colors duration-200"

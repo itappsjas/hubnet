@@ -43,7 +43,7 @@ const airlineAirplanes: { [key: string]: string } = {
   VA: "VA.png",
 };
 
-const airlineData: any = {
+const airlineData: { [key: string]: { name: string; code: string } } = {
   QR: {
     name: "Qatar Airways",
     code: "QR",
@@ -147,12 +147,12 @@ function AirlineDetailContent() {
                 </p> */}
               </div>
               <div className="text-right flex items-center">
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 shadow-lg">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20 shadow-lg w-40 h-24 flex items-center justify-center">
                   <Image
                     src={`/airlines/${airlineCode}.png`}
                     alt={`${airline.name} Logo`}
-                    width={180}
-                    height={130}
+                    width={120}
+                    height={80}
                     className="object-contain drop-shadow-lg"
                   />
                 </div>
@@ -247,7 +247,7 @@ function AirlineDetailContent() {
               <div className="relative bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-white/10 p-6 mt-8">
                 <h3 className="text-lg font-bold text-white flex items-center space-x-2 mb-6">
                   <span className="flex items-center justify-center w-9 h-9 rounded-full bg-slate-600/40 border border-white/10 text-lg">
-                    👥
+                    👨‍👨‍👦‍👦
                   </span>
                   <span>Passenger Information</span>
                 </h3>
