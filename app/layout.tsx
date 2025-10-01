@@ -1,27 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Roboto } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from 'react-hot-toast';
 
 // Font utama
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: "swap",
+const geistSans = localFont({
+  src: "./fonts/geist-font/fonts/GeistMono/webfonts/GeistMono-Regular.woff2",
+  variable: "--font-geist-sans"
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
+const geistMono = localFont({
+  src: "./fonts/geist-font/fonts/GeistMono/webfonts/GeistMono-Regular.woff2",
+  variable: "--font-geist-mono"
 });
 
-const roboto = Roboto({
-  variable: "--font-roboto",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap",
+const roboto = localFont({
+  src: "./fonts/Roboto/static/Roboto-Regular.ttf",
+  variable: "--font-roboto"
 });
 
 export const metadata: Metadata = {
