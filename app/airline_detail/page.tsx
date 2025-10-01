@@ -126,7 +126,7 @@ function AirlineDetailContent() {
               src={`/airplane/${airplaneImage}`}
               alt={`${airline.name} Aircraft`}
               fill
-              className="object-cover"
+              className="object-cover object-center"
               priority
             />
             {/* Enhanced Overlay */}
@@ -146,14 +146,16 @@ function AirlineDetailContent() {
                   {flightNumber ? ` - ${flightNumber}` : ""} • Cargo Operations
                 </p> */}
               </div>
-              <div className="text-right">
-                {/* <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20">
-                  <p className="text-xs text-gray-300">Live Status</p>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <p className="text-sm font-semibold text-green-400">Active</p>
-                  </div>
-                </div> */}
+              <div className="text-right flex items-center">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 shadow-lg">
+                  <Image
+                    src={`/airlines/${airlineCode}.png`}
+                    alt={`${airline.name} Logo`}
+                    width={180}
+                    height={130}
+                    className="object-contain drop-shadow-lg"
+                  />
+                </div>
               </div>
             </div>
           </div>
