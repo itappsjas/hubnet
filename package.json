@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/fiber": "^9.3.0",
+    "@types/three": "^0.180.0",
     "js-base64": "^3.7.7",
     "jspdf": "^3.0.1",
     "jspdf-autotable": "^5.0.2",
     "next": "15.3.4",
+    "ogl": "^1.0.11",
+    "postprocessing": "^6.37.8",
     "qrcode": "^1.5.4",
     "react": "^19.0.0",
     "react-data-table-component": "^7.7.0",
@@ -22,7 +26,8 @@
     "recharts": "^3.1.0",
     "speakeasy": "^2.0.0",
     "styled-components": "^6.1.19",
-    "sweetalert2": "^11.23.0"
+    "sweetalert2": "^11.23.0",
+    "three": "^0.180.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
