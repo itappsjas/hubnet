@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { FaHome, FaPlane } from 'react-icons/fa'
+import { FaHome, FaPlane, FaPortrait } from 'react-icons/fa'
 import { MdSummarize } from 'react-icons/md'
 import { FiLogOut } from 'react-icons/fi'
 import { useRouter } from 'next/navigation'
@@ -62,7 +62,7 @@ const handleLogout = async () => {
 
     // Setelah countdown selesai → tampilkan sesi babay
     await Swal.fire({
-      title: 'Goodbye! 👋',
+      title: 'Goodbye!',
       text: 'See you next time.',
       icon: 'success',
       timer: 2000,
@@ -103,17 +103,20 @@ const handleLogout = async () => {
 
       {/* Menu Ikon */}
         <nav className="flex flex-col gap-6 items-center text-white text-4xl flex-1 justify-center">
-            <a href="dashboard" className="hover:text-yellow-200 transition-transform hover:scale-125">
+            <a href="/dashboard" className="hover:text-yellow-200 transition-transform hover:scale-125">
                 <FaHome />
             </a>
 
             {/* Garis bawah ikon terakhir */}
             <div className="w-10 border-b border-white/30 my-4" />
 
-            <a href="airline" className="hover:text-yellow-200 transition-transform hover:scale-125">
+            <a href="/airline" className="hover:text-yellow-200 transition-transform hover:scale-125">
                 <FaPlane />
             </a>
-            <a href="report" className="hover:text-yellow-200 transition-transform hover:scale-125">
+            <a href="/user" className="hover:text-yellow-200 transition-transform hover:scale-125">
+                <FaPortrait />
+            </a>
+            <a href="/report" className="hover:text-yellow-200 transition-transform hover:scale-125">
                 <MdSummarize />
             </a>
 

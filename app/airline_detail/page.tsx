@@ -247,7 +247,7 @@ function AirlineDetailContent() {
               <div className="relative bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-white/10 p-6 mt-8">
                 <h3 className="text-lg font-bold text-white flex items-center space-x-2 mb-6">
                   <span className="flex items-center justify-center w-9 h-9 rounded-full bg-slate-600/40 border border-white/10 text-lg">
-                    👨‍👨‍👦‍👦
+                    👩🏼‍🦼
                   </span>
                   <span>Passenger Information</span>
                 </h3>

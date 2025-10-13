@@ -577,7 +577,7 @@ function AirlineFlightsContent() {
           <div className="bg-slate-800/40 backdrop-blur-md rounded-xl border border-white/10 p-4">
             <div className="flex items-center gap-3">
               <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-yellow-500/20 text-yellow-400">
-                👨‍👨‍👦‍👦
+                👩🏼‍🦼
               </span>
               <div>
                 <p className="text-2xl font-bold text-white">

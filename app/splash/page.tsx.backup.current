@@ -1,28 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import LightRays from "../components/LightRays";
 
 export default function SplashPage() {
   const router = useRouter();
   const [isExiting, setIsExiting] = useState(false);
-  const [particles, setParticles] = useState<Array<{
-    left: string;
-    top: string;
-    animationDelay: string;
-    animationDuration: string;
-  }>>([]);
-
-  // Generate particles on client side to avoid hydration mismatch
-  useEffect(() => {
-    const generatedParticles = [...Array(4)].map(() => ({
-      left: `${20 + Math.random() * 60}%`,
-      top: `${20 + Math.random() * 60}%`,
-      animationDelay: `${Math.random() * 2}s`,
-      animationDuration: `${4 + Math.random() * 2}s`,
-    }));
-    setParticles(generatedParticles);
-  }, []);
 
   useEffect(() => {
     // Set overflow hidden on mount
@@ -51,6 +34,36 @@ export default function SplashPage() {
 
   return (
     <div className="relative h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
+      {/* Light Rays Background */}
+      <div
+        className={`absolute inset-0 w-full h-full transition-all duration-1200 ease-in-out ${
+          isExiting
+            ? "opacity-0 blur-sm scale-105"
+            : "opacity-100 blur-0 scale-100"
+        }`}
+      >
+        <LightRays 
+          raysColor="#06B6D4"
+          raysSpeed={0.8}
+          lightSpread={1.5}
+          rayLength={2.5}
+          pulsating={true}
+          fadeDistance={1.2}
+          saturation={1.2}
+          followMouse={true}
+          mouseInfluence={0.3}
+          raysOrigin="top-center"
+        />
+      </div>
+
+      {/* Professional Gradient Overlay */}
+      <div
+        className={`absolute inset-0 transition-all duration-1200 ease-in-out ${
+          isExiting
+            ? "bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800"
+            : "bg-gradient-to-br from-slate-950/90 via-slate-900/80 to-slate-800/85"
+        }`}
+      />
 
       {/* Exit overlay */}
       {isExiting && (
@@ -66,32 +79,30 @@ export default function SplashPage() {
         }`}
       >
         {/* Subtle Particles */}
-        {particles.map((particle, i) => (
+        {[...Array(4)].map((_, i) => (
           <div
             key={`particle-${i}`}
             className={`absolute w-1 h-1 bg-white/10 rounded-full animate-float-subtle`}
             style={{
-              left: particle.left,
-              top: particle.top,
-              animationDelay: particle.animationDelay,
-              animationDuration: particle.animationDuration,
+              left: `${20 + Math.random() * 60}%`,
+              top: `${20 + Math.random() * 60}%`,
+              animationDelay: `${Math.random() * 2}s`,
+              animationDuration: `${4 + Math.random() * 2}s`,
             }}
           />
         ))}
       </div>
 
       {/* Main Content */}
-      <div
-        className={`relative z-10 flex flex-col items-center justify-center h-full px-6 transition-all duration-1200 ease-in-out ${
-          isExiting
-            ? "opacity-0 transform scale-95 blur-sm"
-            : "opacity-100 transform scale-100 blur-0"
-        }`}
-      >
+      <div className={`relative z-10 flex flex-col items-center justify-center h-full px-6 transition-all duration-1200 ease-in-out ${
+        isExiting
+          ? "opacity-0 transform scale-95 blur-sm"
+          : "opacity-100 transform scale-100 blur-0"
+      }`}>
         {/* Logo/Brand Section */}
         <div className="text-center max-w-4xl mx-auto">
           {/* JAS HUBNET - Clean typography */}
-          <div className="mb-3 overflow-hidden">
+          <div className="mb-8 overflow-hidden">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white tracking-wider">
               <span
                 className="inline-block animate-slide-in-clean"
@@ -101,11 +112,7 @@ export default function SplashPage() {
               </span>
               <span
                 className="inline-block mx-4 text-slate-400"
-                style={{
-                  animationDelay: "0.3s",
-                  transform: "translateY(-8px)",
-                  fontSize: "0.8em",
-                }}
+                style={{ animationDelay: "0.3s" }}
               >
                 |
               </span>
@@ -129,12 +136,12 @@ export default function SplashPage() {
           </div>
 
           {/* Professional Icons Grid */}
-          {/* <div
+          <div
             className="flex justify-center items-center space-x-12 mb-12 animate-fade-in-clean opacity-0"
             style={{ animationDelay: "1.2s" }}
-          > */}
-          {/* Container Icon */}
-          {/* <div className="group">
+          >
+            {/* Container Icon */}
+            <div className="group">
               <div className="w-12 h-12 rounded-lg bg-slate-800/50 border border-slate-700/50 flex items-center justify-center group-hover:border-cyan-500/50 transition-all duration-300">
                 <svg width="24" height="16" viewBox="0 0 48 32" className="text-slate-400 group-hover:text-cyan-400 transition-colors duration-300">
                   <rect x="4" y="8" width="40" height="20" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5"/>
@@ -143,10 +150,10 @@ export default function SplashPage() {
                   <rect x="32" y="12" width="8" height="8" fill="currentColor" opacity="0.7"/>
                 </svg>
               </div>
-            </div> */}
+            </div>
 
-          {/* Plane Icon */}
-          {/* <div className="group">
+            {/* Plane Icon */}
+            <div className="group">
               <div className="w-12 h-12 rounded-lg bg-slate-800/50 border border-slate-700/50 flex items-center justify-center group-hover:border-cyan-500/50 transition-all duration-300">
                 <svg width="24" height="16" viewBox="0 0 48 32" className="text-slate-400 group-hover:text-cyan-400 transition-colors duration-300">
                   <path d="M8 16 L24 8 L40 16 L32 20 L16 20 Z" fill="currentColor" opacity="0.8"/>
@@ -155,10 +162,10 @@ export default function SplashPage() {
                   <circle cx="32" cy="20" r="2" fill="currentColor"/>
                 </svg>
               </div>
-            </div> */}
+            </div>
 
-          {/* Truck Icon */}
-          {/* <div className="group">
+            {/* Truck Icon */}
+            <div className="group">
               <div className="w-12 h-12 rounded-lg bg-slate-800/50 border border-slate-700/50 flex items-center justify-center group-hover:border-cyan-500/50 transition-all duration-300">
                 <svg width="24" height="16" viewBox="0 0 48 32" className="text-slate-400 group-hover:text-cyan-400 transition-colors duration-300">
                   <rect x="4" y="12" width="24" height="12" rx="2" fill="currentColor" opacity="0.6"/>
@@ -168,7 +175,7 @@ export default function SplashPage() {
                 </svg>
               </div>
             </div>
-          </div> */}
+          </div>
 
           {/* Professional Truck Loading Animation */}
           <div
@@ -180,28 +187,26 @@ export default function SplashPage() {
               <div className="relative w-80 h-24 overflow-hidden">
                 {/* Road/Track Base */}
                 <div className="absolute bottom-4 left-0 right-0 h-3 bg-slate-700/70"></div>
-
+                
                 {/* Progress Bar on Road */}
                 <div className="absolute bottom-4 left-0 h-3 bg-gradient-to-r from-cyan-500 via-cyan-400 to-cyan-300 animate-progress-clean"></div>
-
+                
                 {/* Moving Truck */}
                 <div className="absolute bottom-4 animate-truck-drive-professional">
-                  <Image
-                    src="/truck.gif"
-                    alt="Loading truck"
-                    width={96}
-                    height={64}
+                  <img 
+                    src="/truck.gif" 
+                    alt="Loading truck" 
                     className="w-24 h-16 object-contain drop-shadow-lg"
-                    style={{
-                      transform: "translateY(-2px)",
+                    style={{ 
+                      filter: 'brightness(1.2) saturate(1.5) hue-rotate(180deg)',
+                      transform: 'translateY(-2px)'
                     }}
-                    unoptimized
                   />
                 </div>
               </div>
 
               {/* Status Text */}
-              {/* <div className="text-center">
+              <div className="text-center">
                 <p className="text-slate-300 text-sm font-light tracking-wide">
                   Loading Cargo Data...
                 </p>
@@ -210,7 +215,7 @@ export default function SplashPage() {
                   <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-loading-dot-clean" style={{ animationDelay: "0.2s" }}></div>
                   <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-loading-dot-clean" style={{ animationDelay: "0.4s" }}></div>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
@@ -263,8 +268,7 @@ export default function SplashPage() {
         }
 
         @keyframes float-subtle {
-          0%,
-          100% {
+          0%, 100% {
             transform: translateY(0px);
           }
           50% {
@@ -282,9 +286,7 @@ export default function SplashPage() {
         }
 
         @keyframes loading-dot-clean {
-          0%,
-          80%,
-          100% {
+          0%, 80%, 100% {
             transform: scale(1);
             opacity: 0.4;
           }
@@ -304,8 +306,7 @@ export default function SplashPage() {
         }
 
         .animate-slide-in-clean {
-          animation: slide-in-clean 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-            forwards;
+          animation: slide-in-clean 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
           opacity: 0;
         }
 
@@ -337,3 +338,18 @@ export default function SplashPage() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
