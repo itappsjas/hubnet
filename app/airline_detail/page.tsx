@@ -13,7 +13,7 @@ const airlineAirplanes: { [key: string]: string } = {
   AK: "AK.png",
   "5J": "5J.png",
   AI: "AI.png",
-  BR: "BR.png",
+  NZ: "NZ.png",
   FS: "FS.png",
   EY: "EY.png",
   SV: "SV.png",
@@ -53,7 +53,7 @@ const airlineData: { [key: string]: { name: string; code: string } } = {
   AK: { name: "Air Asia", code: "AK" },
   "5J": { name: "Cebu Pacific", code: "5J" },
   AI: { name: "Air India", code: "AI" },
-  BR: { name: "EVA Air", code: "BR" },
+  NZ: { name: "Air New Zealand", code: "NZ" },
   FS: { name: "Air Fast", code: "FS" },
   EY: { name: "Etihad Airways", code: "EY" },
   SV: { name: "Saudi Arabian Airlines", code: "SV" },
@@ -83,6 +83,7 @@ function AirlineDetailContent() {
       description: "Electronics Components",
       weight: "0.5 Ton",
       pieces: "250 Pcs",
+      volume: "1.2 m³",
       shipper: "Tech Corp Ltd",
       consignee: "Jakarta Electronics",
       status: "Loaded",
@@ -92,6 +93,7 @@ function AirlineDetailContent() {
       description: "Textile Materials",
       weight: "0.8 Ton",
       pieces: "400 Pcs",
+      volume: "2.0 m³",
       shipper: "Fabric Industries",
       consignee: "Indo Textiles",
       status: "Loaded",
@@ -101,6 +103,7 @@ function AirlineDetailContent() {
       description: "Automotive Parts",
       weight: "1.15 Ton",
       pieces: "1,800 Pcs",
+      volume: "3.5 m³",
       shipper: "Auto Parts Co",
       consignee: "Jakarta Motors",
       status: "Loading",
@@ -139,7 +142,9 @@ function AirlineDetailContent() {
                   {airline.name}
                 </h1>
                 <p className="text-cyan-300 text-sm font-medium">
-                  {flightNumber ? `Flight • ${flightNumber}` : "Flight"}
+                  {flightNumber
+                    ? `Flight • ${airline.code}-${flightNumber.replace(/^[A-Z]+-/, "")}`
+                    : "Flight"}
                 </p>
                 {/* <p className="text-cyan-300 text-sm font-medium">
                   Flight {airline.code}
@@ -163,34 +168,11 @@ function AirlineDetailContent() {
 
         {/* Main Content - Enhanced Layout */}
         <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 pb-6">
-          {/* Kiri - Modern Cargo Visual */}
-          <div className="lg:col-span-5 flex flex-col space-y-10">
+          {/* Kiri - Modern Cargo Visual + AWB Details */}
+          <div className="lg:col-span-6 flex flex-col space-y-8">
+            {/* Cargo Visual */}
             <div className="relative">
-              {/* Soft Animated Gradient Background */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-purple-500/10 to-cyan-500/10 rounded-3xl blur-3xl animate-[pulse_8s_ease-in-out_infinite]" />
-
-              {/* Multiple Animated Background Layers */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
-              <div className="absolute inset-0 bg-gradient-to-l from-green-500/5 via-blue-500/5 to-indigo-500/5 rounded-full blur-2xl animate-pulse delay-500"></div>
-
-              {/* Floating Particles Effect */}
-              <div className="absolute top-10 left-10 w-2 h-2 bg-blue-400/60 rounded-full animate-bounce delay-100"></div>
-              <div className="absolute top-20 right-16 w-1 h-1 bg-purple-400/60 rounded-full animate-bounce delay-300"></div>
-              <div className="absolute bottom-20 left-20 w-1.5 h-1.5 bg-cyan-400/60 rounded-full animate-bounce delay-700"></div>
-
-              <div className="relative flex justify-center mb-6">
-                <div className="relative group">
-                  <Image
-                    src="/box.png"
-                    alt="Cargo Boxes"
-                    width={280}
-                    height={180}
-                    className="object-contain drop-shadow-2xl transition-transform duration-300 group-hover:scale-105"
-                  />
-                  {/* Glow Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-transparent to-purple-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-              </div>
+              
 
               {/* Stats Grid */}
               <div className="grid grid-cols-3 gap-4">
@@ -242,73 +224,84 @@ function AirlineDetailContent() {
                   </div>
                 ))}
               </div>
+            </div>
 
-              {/* Passenger Information */}
-              <div className="relative bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-white/10 p-6 mt-8">
-                <h3 className="text-lg font-bold text-white flex items-center space-x-2 mb-6">
-                  <span className="flex items-center justify-center w-9 h-9 rounded-full bg-slate-600/40 border border-white/10 text-lg">
-                    👩🏼‍🦼
+            {/* AWB Details Section (moved to left, below cargo summary) */}
+            <div className="flex-1 relative bg-gradient-to-br from-slate-800/20 to-slate-900/20 backdrop-blur-sm rounded-2xl border border-white/10 p-4">
+              <div className="relative flex items-center justify-between mb-4">
+                <h4 className="text-lg font-bold text-white flex items-center space-x-2">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-700/40 border border-white/10">
+                    📋
                   </span>
-                  <span>Passenger Information</span>
-                </h3>
-                <div className="mb-4">
-                  <div className="bg-gradient-to-r from-indigo-500/15 to-purple-500/15 backdrop-blur-sm px-3 py-1 rounded-lg border border-indigo-500/30 inline-block">
-                    <p className="text-xs text-indigo-300 font-mono">
-                      🔍 13348907654 (14 AUG 2025 11:16:21)
-                    </p>
-                  </div>
+                  <span>Air Waybill Details</span>
+                </h4>
+                <div className="bg-gradient-to-r from-indigo-500/15 to-purple-500/15 backdrop-blur-sm px-3 py-1 rounded-lg border border-indigo-500/30">
+                  <p className="text-xs text-indigo-300 font-mono">
+                    🔍 123456788919 (14 AUG 2025 11:16:21)
+                  </p>
                 </div>
-                <div className="grid grid-cols-3 gap-2">
-                  {[
-                    {
-                      label: "PCF",
-                      value: "0Kg",
-                      color: "blue",
-                      icon: "📊",
-                    },
-                    {
-                      label: "Total Seat",
-                      value: "175",
-                      color: "blue",
-                      icon: "💺",
-                    },
-                    {
-                      label: "Total Pax",
-                      value: "200",
-                      color: "blue",
-                      icon: "🧳",
-                    },
-                  ].map((info, idx) => (
-                    <div
-                      key={idx}
-                      className="group relative bg-slate-900/40 rounded-xl border border-white/10 p-5 hover:border-white/20 hover:shadow-lg hover:shadow-slate-900/30 transition-all duration-300"
+              </div>
+
+              {/* Enhanced AWB Cards */}
+              <div className="space-y-3 max-h-[640px] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
+                {awbData.map((awb, index) => (
+                  <div
+                    key={awb.awbNumber}
+                    className="group relative bg-gradient-to-r from-slate-800/40 to-slate-700/20 backdrop-blur-sm rounded-xl border border-white/10 p-5 hover:border-white/20 transition-all duration-300"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <div className="relative flex items-center justify-between mb-3">
+                      <div>
+                        <h5 className="text-white font-bold text-sm flex items-center">
+                          📄 AWB:{" "}
+                          <span className="text-cyan-400 ml-2">
+                            {awb.awbNumber}
+                          </span>
+                        </h5>
+                        <p className="text-gray-400 text-xs mt-1">
+                          📦 {awb.description}
+                        </p>
+                      </div>
+                      {/* <span
+                        className={`px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm border transition-all duration-300 ${
+                          awb.status === "Loaded"
+                            ? "bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-400 border-green-500/30"
+                            : "bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-400 border-yellow-500/30"
+                        }`}
                     >
-                      <div className="flex items-center space-x-3">
-                        {/* Icon */}
-                        <div
-                          className={`flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-${info.color}-500/20 to-${info.color}-600/10 text-lg`}
-                        >
-                          {info.icon}
-                        </div>
-                        <div>
-                          {/* Value */}
-                          <p className="text-xl font-bold text-white">
-                            {info.value}
-                          </p>
-                          {/* Label */}
-                          <p className="text-xs text-gray-400">{info.label}</p>
-                        </div>
+                      {awb.status === "Loaded" ? "✅" : "⏳"} {awb.status}
+                    </span> */}
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-3">
+                      <div className="text-center p-2 bg-blue-500/10 rounded-lg border border-blue-500/20">
+                        <p className="text-blue-300 text-xs mb-1">⚖️ Weight</p>
+                        <p className="text-blue-400 font-bold text-sm">
+                          {awb.weight}
+                        </p>
+                      </div>
+                      <div className="text-center p-2 bg-green-500/10 rounded-lg border border-green-500/20">
+                        <p className="text-green-300 text-xs mb-1">📦 Pieces</p>
+                        <p className="text-green-400 font-bold text-sm">
+                          {awb.pieces}
+                        </p>
+                      </div>
+                      <div className="text-center p-2 bg-purple-500/10 rounded-lg border border-purple-500/20">
+                        <p className="text-purple-300 text-xs mb-1">🧊 Volume</p>
+                        <p className="text-purple-400 font-bold text-sm">
+                          {awb.volume}
+                        </p>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* Kanan - Enhanced AWB Details */}
-          <div className="lg:col-span-7 flex flex-col space-y-6">
-            {/* Enhanced Header */}
+          {/* Kanan - Flight Info + Passenger Information */}
+          <div className="lg:col-span-6 flex flex-col space-y-8">
+            {/* Flight Information */}
             <div className="relative bg-gradient-to-r from-slate-800/40 to-slate-700/40 backdrop-blur-md rounded-2xl border border-white/10 p-6 shadow-lg shadow-black/30">
               <div className="relative flex flex-col space-y-4">
                 {/* Header with Title and Status */}
@@ -474,76 +467,60 @@ function AirlineDetailContent() {
 `}
             </style>
 
-            {/* AWB Details Section */}
-            <div className="flex-1 relative bg-gradient-to-br from-slate-800/20 to-slate-900/20 backdrop-blur-sm rounded-2xl border border-white/10 p-4">
-              <div className="relative flex items-center justify-between mb-4">
-                <h4 className="text-lg font-bold text-white flex items-center space-x-2">
-                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-700/40 border border-white/10">
-                    📋
-                  </span>
-                  <span>Air Waybill Details</span>
-                </h4>
-                <div className="bg-gradient-to-r from-indigo-500/15 to-purple-500/15 backdrop-blur-sm px-3 py-1 rounded-lg border border-indigo-500/30">
+            {/* Passenger Information Section (moved to right, below flight info) */}
+            <div className="relative bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-white/10 p-6">
+              <h3 className="text-lg font-bold text-white flex items-center space-x-2 mb-6">
+                <span className="flex items-center justify-center w-9 h-9 rounded-full bg-slate-600/40 border border-white/10 text-lg">
+                  👩🏼‍🦼
+                </span>
+                <span>Passenger Information</span>
+              </h3>
+              <div className="mb-4">
+                <div className="bg-gradient-to-r from-indigo-500/15 to-purple-500/15 backdrop-blur-sm px-3 py-1 rounded-lg border border-indigo-500/30 inline-block">
                   <p className="text-xs text-indigo-300 font-mono">
-                    🔍 123456788919 (14 AUG 2025 11:16:21)
+                    🔍 13348907654 (14 AUG 2025 11:16:21)
                   </p>
                 </div>
               </div>
-
-              {/* Enhanced AWB Cards */}
-              <div className="space-y-3 max-h-[320px] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
-                {awbData.map((awb, index) => (
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  {
+                    label: "PCF",
+                    value: "0Kg",
+                    color: "blue",
+                    icon: "📊",
+                  },
+                  {
+                    label: "Total Seat",
+                    value: "175",
+                    color: "blue",
+                    icon: "💺",
+                  },
+                  {
+                    label: "Total Pax",
+                    value: "200",
+                    color: "blue",
+                    icon: "🧳",
+                  },
+                ].map((info, idx) => (
                   <div
-                    key={awb.awbNumber}
-                    className="group relative bg-gradient-to-r from-slate-800/40 to-slate-700/20 backdrop-blur-sm rounded-xl border border-white/10 p-5 hover:border-white/20 transition-all duration-300"
-                    style={{ animationDelay: `${index * 100}ms` }}
+                    key={idx}
+                    className="group relative bg-slate-900/40 rounded-xl border border-white/10 p-5 hover:border-white/20 hover:shadow-lg hover:shadow-slate-900/30 transition-all duration-300"
                   >
-                    <div className="relative flex items-center justify-between mb-3">
-                      <div>
-                        <h5 className="text-white font-bold text-sm flex items-center">
-                          📄 AWB:{" "}
-                          <span className="text-cyan-400 ml-2">
-                            {awb.awbNumber}
-                          </span>
-                        </h5>
-                        <p className="text-gray-400 text-xs mt-1">
-                          📦 {awb.description}
-                        </p>
-                      </div>
-                      {/* <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm border transition-all duration-300 ${
-                          awb.status === "Loaded"
-                            ? "bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-400 border-green-500/30"
-                            : "bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-400 border-yellow-500/30"
-                        }`}
+                    <div className="flex items-center space-x-3">
+                      {/* Icon */}
+                      <div
+                        className={`flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-${info.color}-500/20 to-${info.color}-600/10 text-lg`}
                       >
-                        {awb.status === "Loaded" ? "✅" : "⏳"} {awb.status}
-                      </span> */}
-                    </div>
-
-                    <div className="grid grid-cols-3 gap-3">
-                      <div className="text-center p-2 bg-blue-500/10 rounded-lg border border-blue-500/20">
-                        <p className="text-blue-300 text-xs mb-1">⚖️ Weight</p>
-                        <p className="text-blue-400 font-bold text-sm">
-                          {awb.weight}
-                        </p>
+                        {info.icon}
                       </div>
-                      <div className="text-center p-2 bg-green-500/10 rounded-lg border border-green-500/20">
-                        <p className="text-green-300 text-xs mb-1">📦 Pieces</p>
-                        <p className="text-green-400 font-bold text-sm">
-                          {awb.pieces}
+                      <div>
+                        {/* Value */}
+                        <p className="text-xl font-bold text-white">
+                          {info.value}
                         </p>
-                      </div>
-                      <div className="flex items-center justify-center p-2 bg-purple-500/10 rounded-lg border border-purple-500/20">
-                        <span
-                          className={`px-2 py-1 rounded-full text-xs font-semibold transition-all duration-300 ${
-                            awb.status === "Loaded"
-                              ? "bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-400 border border-green-500/30"
-                              : "bg-gradient-to-r from-red-500/20 to-red-600/20 text-red-400 border border-red-500/30"
-                          }`}
-                        >
-                          {awb.status === "Loaded" ? "Completed" : "Not Send"}
-                        </span>
+                        {/* Label */}
+                        <p className="text-xs text-gray-400">{info.label}</p>
                       </div>
                     </div>
                   </div>

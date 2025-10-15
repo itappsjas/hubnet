@@ -19,6 +19,16 @@ import {
   Area,
 } from "recharts";
 
+// Define chart data type
+interface ChartDataPoint {
+  date: string;
+  name: string;
+  sent: number;
+  success: number;
+  flights: number;
+  awb: number;
+}
+
 export default function DashboardPage() {
   // State untuk summary data
   const [summaryData, setSummaryData] = useState({
@@ -29,43 +39,72 @@ export default function DashboardPage() {
     successRate: 0,
   });
 
-  // Data grafik 7 hari ke belakang
-  const getLast7Days = () => {
-    const days = [];
+  // State untuk filter station di chart
+  const [selectedStation, setSelectedStation] = useState("ALL");
+
+  // Data grafik 7 hari ke belakang per station
+  const getStationData = (station: string): ChartDataPoint[] => {
+    const days: ChartDataPoint[] = [];
     for (let i = 6; i >= 0; i--) {
       const date = new Date();
       date.setDate(date.getDate() - i);
+      
+      // Different data ranges for each station
+      let baseMultiplier = 1;
+      switch (station) {
+        case "CGK":
+          baseMultiplier = 1.5; // CGK has higher traffic
+          break;
+        case "SUB":
+          baseMultiplier = 1.2;
+          break;
+        case "DPS":
+          baseMultiplier = 0.8;
+          break;
+        default:
+          baseMultiplier = 1;
+      }
+      
       days.push({
         date: date.toISOString().split("T")[0],
         name: date.toLocaleDateString("id-ID", {
           month: "short",
           day: "numeric",
         }),
-        sent: Math.floor(Math.random() * 50) + 10,
-        success: Math.floor(Math.random() * 45) + 8,
-        flights: Math.floor(Math.random() * 15) + 3,
-        awb: Math.floor(Math.random() * 100) + 20,
+        sent: Math.floor((Math.random() * 50 + 10) * baseMultiplier),
+        success: Math.floor((Math.random() * 45 + 8) * baseMultiplier),
+        flights: Math.floor((Math.random() * 15 + 3) * baseMultiplier),
+        awb: Math.floor((Math.random() * 100 + 20) * baseMultiplier),
       });
     }
     return days;
   };
 
-  const [last7DaysData] = useState(getLast7Days());
+  // Data untuk semua station
+  const [allStationsData] = useState({
+    ALL: getStationData("ALL"),
+    CGK: getStationData("CGK"),
+    SUB: getStationData("SUB"),
+    DPS: getStationData("DPS"),
+  });
+
+  // Data yang sedang ditampilkan berdasarkan station yang dipilih
+  const currentChartData = allStationsData[selectedStation as keyof typeof allStationsData];
 
   // Load summary data (simulate API call)
   useEffect(() => {
     const loadSummaryData = () => {
-      // Simulate API response
-      const totalSent = last7DaysData.reduce((sum, day) => sum + day.sent, 0);
-      const totalSuccess = last7DaysData.reduce(
-        (sum, day) => sum + day.success,
+      // Simulate API response based on selected station
+      const totalSent = currentChartData.reduce((sum: number, day: ChartDataPoint) => sum + day.sent, 0);
+      const totalSuccess = currentChartData.reduce(
+        (sum: number, day: ChartDataPoint) => sum + day.success,
         0
       );
-      const totalFlight = last7DaysData.reduce(
-        (sum, day) => sum + day.flights,
+      const totalFlight = currentChartData.reduce(
+        (sum: number, day: ChartDataPoint) => sum + day.flights,
         0
       );
-      const totalAwb = last7DaysData.reduce((sum, day) => sum + day.awb, 0);
+      const totalAwb = currentChartData.reduce((sum: number, day: ChartDataPoint) => sum + day.awb, 0);
       const successRate =
         totalSent > 0 ? Math.round((totalSuccess / totalSent) * 100) : 0;
 
@@ -79,7 +118,7 @@ export default function DashboardPage() {
     };
 
     loadSummaryData();
-  }, [last7DaysData]);
+  }, [selectedStation, currentChartData]);
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-slate-800 to-gray-900 text-white relative">
@@ -88,14 +127,44 @@ export default function DashboardPage() {
       <main className="flex-1 p-6 pb-24 lg:pb-6">
         <PageHeader title="📦 AWB SENT TO HUBNET" />
 
+         {/* Station Filter for Charts */}
+        <div className="mb-6 bg-gradient-to-br from-slate-700/60 to-slate-800/70 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-slate-600/30">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              {/* <div className="w-8 h-8 bg-gradient-to-br from-cyan-500/80 to-blue-600/80 rounded-lg flex items-center justify-center backdrop-blur-sm border border-cyan-400/30">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V6.618a1 1 0 01.553-.894L9 3l6 3 5.447-2.724A1 1 0 0121 4.382v9.764a1 1 0 01-.553.894L15 18l-6-3z" />
+                </svg>
+              </div> */}
+              <div>
+                <h3 className="text-base font-semibold text-white">Station Data View</h3>
+                <p className="text-xs text-slate-400">Select station to view specific data</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <label className="text-sm text-slate-300 font-medium">Station:</label>
+              <select
+                value={selectedStation}
+                onChange={(e) => setSelectedStation(e.target.value)}
+                className="px-3 py-2 bg-slate-600/40 border border-slate-500/40 rounded-lg text-white/90 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400/50 transition-all duration-200 hover:border-slate-400/60 min-w-[120px]"
+              >
+                <option value="ALL">All Stations</option>
+                <option value="CGK">CGK - Soekarno Hatta</option>
+                <option value="SUB">SUB - Juanda</option>
+                <option value="DPS">DPS - Ngurah Rai</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
           {/* Total Data Dikirim */}
           <div className="relative bg-gradient-to-br from-slate-700/80 to-slate-800/90 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-blue-300/20 hover:border-blue-300/40 transition-all duration-300 hover:scale-105">
             <div className="absolute -bottom-5 right-0 w-36 h-36 z-20">
               <Image
-                src="/pesawat.png"
-                alt="Airplane"
+                src="/cntrr.png"
+                alt="Container"
                 width={144}
                 height={144}
                 className="w-full h-full object-contain drop-shadow-lg"
@@ -114,7 +183,7 @@ export default function DashboardPage() {
           <div className="relative bg-gradient-to-br from-slate-700/80 to-slate-800/90 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-emerald-300/20 hover:border-emerald-300/40 transition-all duration-300 hover:scale-105">
             <div className="absolute -bottom-5 right-0 w-36 h-36 z-20">
               <Image
-                src="/pesawat.png"
+                src="/ckls.png"
                 alt="Airplane"
                 width={144}
                 height={144}
@@ -138,7 +207,7 @@ export default function DashboardPage() {
           <div className="relative bg-gradient-to-br from-slate-700/80 to-slate-800/90 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-violet-300/20 hover:border-violet-300/40 transition-all duration-300 hover:scale-105">
             <div className="absolute -bottom-5 right-0 w-36 h-36 z-20">
               <Image
-                src="/pesawat.png"
+                src="/pswt.png"
                 alt="Airplane"
                 width={144}
                 height={144}
@@ -160,7 +229,7 @@ export default function DashboardPage() {
           <div className="relative bg-gradient-to-br from-slate-700/80 to-slate-800/90 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-amber-300/20 hover:border-amber-300/40 transition-all duration-300 hover:scale-105">
             <div className="absolute -bottom-5 right-0 w-36 h-36 z-20">
               <Image
-                src="/pesawat.png"
+                src="/bill.png"
                 alt="Airplane"
                 width={144}
                 height={144}
@@ -180,7 +249,7 @@ export default function DashboardPage() {
           <div className="relative bg-gradient-to-br from-slate-700/80 to-slate-800/90 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-teal-300/20 hover:border-teal-300/40 transition-all duration-300 hover:scale-105">
             <div className="absolute -bottom-5 right-0 w-36 h-36 z-20">
               <Image
-                src="/pesawat.png"
+                src="/rate.png"
                 alt="Airplane"
                 width={144}
                 height={144}
@@ -197,6 +266,8 @@ export default function DashboardPage() {
           </div>
         </div>
 
+       
+
         {/* Charts Section - 7 Days Trend & AWB Flight Performance */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
           {/* Grafik 7 Hari Ke Belakang */}
@@ -208,12 +279,20 @@ export default function DashboardPage() {
                 </svg>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-white">7 Days Trend Analysis</h3>
-                <p className="text-sm text-slate-400">Data performance over the last week</p>
+                <h3 className="text-lg font-semibold text-white">
+                  7 Days Trend Analysis
+                  {selectedStation !== "ALL" && (
+                    <span className="text-cyan-400 ml-2">({selectedStation})</span>
+                  )}
+                </h3>
+                <p className="text-sm text-slate-400">
+                  Data performance over the last week
+                  {selectedStation !== "ALL" && ` for ${selectedStation} station`}
+                </p>
               </div>
             </div>
             <ResponsiveContainer width="100%" height={320}>
-              <AreaChart data={last7DaysData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+              <AreaChart data={currentChartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorSent" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.8}/>
@@ -306,12 +385,20 @@ export default function DashboardPage() {
                 </svg>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-white">AWB & Flight Performance</h3>
-                <p className="text-sm text-slate-400">Combined metrics analysis</p>
+                <h3 className="text-lg font-semibold text-white">
+                  AWB & Flight Performance
+                  {selectedStation !== "ALL" && (
+                    <span className="text-orange-400 ml-2">({selectedStation})</span>
+                  )}
+                </h3>
+                <p className="text-sm text-slate-400">
+                  Combined metrics analysis
+                  {selectedStation !== "ALL" && ` for ${selectedStation} station`}
+                </p>
               </div>
             </div>
             <ResponsiveContainer width="100%" height={320}>
-              <ComposedChart data={last7DaysData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+              <ComposedChart data={currentChartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#475569" opacity={0.3} />
                 <XAxis 
                   dataKey="name" 
@@ -384,7 +471,7 @@ export default function DashboardPage() {
             {/* Legend */}
             <div className="flex justify-center gap-6 mt-4 text-sm">
               <div className="flex items-center gap-2">
-                <div className="w-4 h-3 bg-orange-500 rounded"></div>
+                <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
                 <span className="text-slate-300">Total AWB</span>
               </div>
               <div className="flex items-center gap-2">
