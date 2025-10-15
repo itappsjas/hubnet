@@ -33,7 +33,6 @@ const airlineAirplanes: { [key: string]: string } = {
   JX: "JX.png",
   MH: "MH.png",
   MU: "MU.png",
-  NZ: "NZ.png",
   PR: "PR.png",
   QF: "QF.png",
   QZ: "QZ.png",
