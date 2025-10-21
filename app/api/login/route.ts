@@ -8,20 +8,17 @@ export async function POST(request: Request) {
     try {
         const { username, password } = await request.json();
         
-        console.log('Login attempt:', {
-            email: username, // username is actually email from frontend
-            password: '[REDACTED]' // Don't log actual password
-        });
-
-        // Find user by email first (don't include password in where clause)
+        // Find user by email with role and airline info
         const user = await prisma.tb_user.findFirst({
             where: {
                 email: username, // username field from frontend is actually email
                 is_active: 1
+            },
+            include: {
+                role: true,
+                airline: true
             }
         });
-
-        console.log('User found:', user ? 'Yes' : 'No');
 
         if (user) {
             // Compare password using bcrypt
@@ -30,7 +27,45 @@ export async function POST(request: Request) {
             if (isPasswordValid) {
                 // User found and password valid - Login successful
                 const loginTime = new Date().getTime(); // Get current timestamp
+                // Role logic for frontend menu access
+                let menuAccess = {
+                    showAllMenu: false,
+                    canGenerateReport: false,
+                    canManageUser: false,
+                    airlineMenuDirect: false,
+                    airlineCode: user.airline?.airline_code || null,
+                    allowedMenus: [] as string[]
+                };
+                const roleCode = user.role.code_role.toLowerCase();
                 
+                if (roleCode === 'admin') {
+                    menuAccess = {
+                        showAllMenu: true,
+                        canGenerateReport: true,
+                        canManageUser: true,
+                        airlineMenuDirect: false,
+                        airlineCode: null,
+                        allowedMenus: ['dashboard', 'airline', 'user', 'report']
+                    };
+                } else if (roleCode === 'view') {
+                    menuAccess = {
+                        showAllMenu: true,
+                        canGenerateReport: false,
+                        canManageUser: true,
+                        airlineMenuDirect: false,
+                        airlineCode: null,
+                        allowedMenus: ['dashboard', 'airline', 'user', 'report']
+                    };
+                } else if (roleCode === 'airline') {
+                    menuAccess = {
+                        showAllMenu: false, // hanya menu tertentu
+                        canGenerateReport: false,
+                        canManageUser: false,
+                        airlineMenuDirect: true,
+                        airlineCode: user.airline?.airline_code || null,
+                        allowedMenus: ['dashboard', 'airline']
+                    };
+                }
                 return NextResponse.json({ 
                     success: true,
                     logged_in: "1",
@@ -38,7 +73,11 @@ export async function POST(request: Request) {
                     user: {
                         id: user.id_usr,
                         email: user.email,
-                        role: user.id_role
+                        role: user.role.code_role.toLowerCase(), // Convert to lowercase for consistency
+                        roleId: user.id_role,
+                        airlineCode: user.airline?.airline_code,
+                        airlineName: user.airline?.airline_name,
+                        menuAccess
                     }
                 });
             }

@@ -24,7 +24,8 @@ export async function GET(request: NextRequest) {
     const users = await prisma.tb_user.findMany({
       where,
       include: {
-        role: true
+        role: true,
+        airline: true
       },
       orderBy: {
         id_usr: 'asc'
@@ -45,12 +46,24 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { email, password, id_role, is_active } = body
+    const { email, password, id_role, id_air, is_active } = body
 
     // Validation
     if (!email || !password || !id_role) {
       return NextResponse.json(
         { success: false, message: 'Email, password, and role are required' },
+        { status: 400 }
+      )
+    }
+
+    // Validate id_air for airline role
+    const role = await prisma.tb_role.findUnique({
+      where: { id_role: parseInt(id_role) }
+    })
+
+    if (role?.code_role.toLowerCase() === 'airline' && !id_air) {
+      return NextResponse.json(
+        { success: false, message: 'Airline is required for airline role' },
         { status: 400 }
       )
     }
@@ -76,10 +89,12 @@ export async function POST(request: NextRequest) {
         email,
         password: hashedPassword,
         id_role: parseInt(id_role),
+        id_air: id_air ? parseInt(id_air) : null,
         is_active: is_active ?? 1
       },
       include: {
-        role: true
+        role: true,
+        airline: true
       }
     })
 
@@ -101,11 +116,23 @@ export async function POST(request: NextRequest) {
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json()
-    const { id_usr, email, password, id_role, is_active } = body
+    const { id_usr, email, password, id_role, id_air, is_active } = body
 
     if (!id_usr) {
       return NextResponse.json(
         { success: false, message: 'User ID is required' },
+        { status: 400 }
+      )
+    }
+
+    // Validate id_air for airline role
+    const role = await prisma.tb_role.findUnique({
+      where: { id_role: parseInt(id_role) }
+    })
+
+    if (role?.code_role.toLowerCase() === 'airline' && !id_air) {
+      return NextResponse.json(
+        { success: false, message: 'Airline is required for airline role' },
         { status: 400 }
       )
     }
@@ -126,11 +153,13 @@ export async function PUT(request: NextRequest) {
     const updateData: {
       email: string;
       id_role: number;
+      id_air: number | null;
       is_active: number;
       password?: string;
     } = {
       email,
       id_role: parseInt(id_role),
+      id_air: id_air ? parseInt(id_air) : null,
       is_active: is_active ? 1 : 0
     }
 
@@ -144,7 +173,8 @@ export async function PUT(request: NextRequest) {
       where: { id_usr: parseInt(id_usr) },
       data: updateData,
       include: {
-        role: true
+        role: true,
+        airline: true
       }
     })
 

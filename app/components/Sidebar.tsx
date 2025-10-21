@@ -4,10 +4,34 @@ import { FaHome, FaPlane, FaPortrait } from 'react-icons/fa'
 import { MdSummarize } from 'react-icons/md'
 import { FiLogOut } from 'react-icons/fi'
 import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
+
+interface User {
+  id: number
+  email: string
+  role: string
+  roleId: number
+  airlineCode?: string
+  airlineName?: string
+}
 
 export default function Sidebar() {
   const router = useRouter()
+  const [user, setUser] = useState<User | null>(null)
+
+  useEffect(() => {
+    // Get user info from localStorage
+    const userStr = localStorage.getItem('user')
+    if (userStr) {
+      try {
+        const userData = JSON.parse(userStr)
+        setUser(userData)
+      } catch (error) {
+        console.error('Error parsing user data:', error)
+      }
+    }
+  }, [])
 
 const handleLogout = async () => {
   const result = await Swal.fire({
@@ -80,6 +104,9 @@ const handleLogout = async () => {
       }
     })
 
+    // Clear semua data session dari localStorage
+    localStorage.clear()
+    
     // Redirect ke login page
     router.push('/login')
   }
@@ -110,14 +137,31 @@ const handleLogout = async () => {
             {/* Garis bawah ikon terakhir */}
             <div className="w-10 border-b border-white/30 my-4" />
 
-            <a href="/airline" className="hover:text-yellow-200 transition-transform hover:scale-125">
+            {/* Airline menu - untuk airline role langsung ke flights */}
+            {user?.role === 'airline' ? (
+              <a 
+                href={`/airline_flight?airline=${user.airlineCode}`} 
+                className="hover:text-yellow-200 transition-transform hover:scale-125"
+                title={user.airlineName}
+              >
                 <FaPlane />
-            </a>
-            <a href="/user" className="hover:text-yellow-200 transition-transform hover:scale-125">
+              </a>
+            ) : (
+              <a href="/airline" className="hover:text-yellow-200 transition-transform hover:scale-125">
+                <FaPlane />
+              </a>
+            )}
+
+            {/* User management - only admin can access */}
+            {user?.role === 'admin' && (
+              <a href="/user" className="hover:text-yellow-200 transition-transform hover:scale-125">
                 <FaPortrait />
-            </a>
+              </a>
+            )}
+
+            {/* Report menu - all authenticated roles can access */}
             <a href="/report" className="hover:text-yellow-200 transition-transform hover:scale-125">
-                <MdSummarize />
+              <MdSummarize />
             </a>
 
             {/* Garis bawah ikon terakhir */}

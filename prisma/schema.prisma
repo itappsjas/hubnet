@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,21 +8,29 @@ datasource db {
 }
 
 model tb_user {
-  id_usr    Int      @id @default(autoincrement())
+  id_usr    Int          @id @default(autoincrement())
   id_role   Int
-  email     String   @unique
+  id_air    Int?
+  email     String       @unique
   password  String
-  is_active Int      @default(1)
+  is_active Int          @default(1)
+  role      tb_role      @relation(fields: [id_role], references: [id_role])
+  airline   tb_airline?  @relation(fields: [id_air], references: [id_air])
 
-  role      tb_role  @relation(fields: [id_role], references: [id_role])
+  @@index([id_role], map: "tb_user_id_role_fkey")
+  @@index([id_air], map: "tb_user_id_air_fkey")
 }
 
 model tb_role {
-  id_role   Int      @id @default(autoincrement())
+  id_role   Int       @id @default(autoincrement())
   code_role String
-  is_active Int      @default(1)
-
+  is_active Int       @default(1)
   users     tb_user[]
 }
 
-
+model tb_airline {
+  id_air       Int        @id @default(autoincrement())
+  airline_code String?    @db.VarChar(5)
+  airline_name String?    @db.VarChar(50)
+  users        tb_user[]
+}

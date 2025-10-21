@@ -11,10 +11,10 @@ export default function VerifyMFA() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    const secret = localStorage.getItem('mfa_secret') // HARUS ADA
+    const secret = localStorage.getItem('mfa_secret') // REQUIRED
 
     if (!secret) {
-      setError('Secret tidak ditemukan di localStorage')
+      setError('Secret not found in localStorage')
       return
     }
 
@@ -28,7 +28,7 @@ export default function VerifyMFA() {
     console.log('Response MFA:', data)
 
     if (data.success) {
-      router.push('/dashboard') // ✅ Redirect ke dashboard
+      router.push('/dashboard') // ✅ Redirect to dashboard
     } else {
       setError(data.message)
     }
@@ -40,14 +40,14 @@ export default function VerifyMFA() {
         type="text"
         value={token}
         onChange={(e) => setToken(e.target.value)}
-        placeholder="Masukkan kode OTP"
+        placeholder="Enter OTP code"
         className="border p-2 w-full mb-2"
         autoFocus
         required
-        pattern="\d{6}" // Validasi 6 digit angka
+        pattern="\d{6}" // Validate 6 digit number
       />
       <button type="submit" className="bg-orange-500 text-white px-4 py-2 rounded">
-        Verifikasi
+        Verify
       </button>
       {error && <p className="text-red-500 mt-2">{error}</p>}
     </form>

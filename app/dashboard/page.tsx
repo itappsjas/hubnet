@@ -18,6 +18,7 @@ import {
   AreaChart,
   Area,
 } from "recharts";
+import { useAuthCheck } from "../components/withAuth";
 
 // Define chart data type
 interface ChartDataPoint {
@@ -30,6 +31,9 @@ interface ChartDataPoint {
 }
 
 export default function DashboardPage() {
+  // Protect page - all authenticated roles can access dashboard
+  const { isAuthorized, isLoading } = useAuthCheck(['admin', 'view', 'airline']);
+
   // State untuk summary data
   const [summaryData, setSummaryData] = useState({
     totalSent: 0,
@@ -120,6 +124,18 @@ export default function DashboardPage() {
     loadSummaryData();
   }, [selectedStation, currentChartData]);
 
+  // Show loading screen while checking authorization
+  if (isLoading || !isAuthorized) {
+    return (
+      <div className="flex min-h-screen bg-gradient-to-br from-slate-800 to-gray-900 text-white items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
+          <p className="mt-4 text-gray-400">Checking access...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-slate-800 to-gray-900 text-white relative">
       <Sidebar />
@@ -160,13 +176,13 @@ export default function DashboardPage() {
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
           {/* Total Data Dikirim */}
-          <div className="relative bg-gradient-to-br from-slate-700/80 to-slate-800/90 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-blue-300/20 hover:border-blue-300/40 transition-all duration-300 hover:scale-105">
-            <div className="absolute -bottom-5 right-0 w-36 h-36 z-20">
+          <div className="relative bg-gradient-to-br from-slate-700/80 to-slate-800/90 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-blue-300/20 hover:border-blue-300/40 transition-all duration-300 hover:scale-105 overflow-hidden">
+            <div className="absolute bottom-2 right-2 w-20 h-20">
               <Image
                 src="/cntrr.png"
                 alt="Container"
-                width={144}
-                height={144}
+                width={80}
+                height={80}
                 className="w-full h-full object-contain drop-shadow-lg"
               />
             </div>
@@ -179,14 +195,14 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          {/* Berhasil Terkirim */}
-          <div className="relative bg-gradient-to-br from-slate-700/80 to-slate-800/90 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-emerald-300/20 hover:border-emerald-300/40 transition-all duration-300 hover:scale-105">
-            <div className="absolute -bottom-5 right-0 w-36 h-36 z-20">
+          {/* Successfully Sent */}
+          <div className="relative bg-gradient-to-br from-slate-700/80 to-slate-800/90 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-emerald-300/20 hover:border-emerald-300/40 transition-all duration-300 hover:scale-105 overflow-hidden">
+            <div className="absolute bottom-2 right-2 w-20 h-20">
               <Image
                 src="/ckls.png"
                 alt="Airplane"
-                width={144}
-                height={144}
+                width={80}
+                height={80}
                 className="w-full h-full object-contain drop-shadow-lg"
               />
             </div>
@@ -204,13 +220,13 @@ export default function DashboardPage() {
           </div>
 
           {/* Total Flight */}
-          <div className="relative bg-gradient-to-br from-slate-700/80 to-slate-800/90 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-violet-300/20 hover:border-violet-300/40 transition-all duration-300 hover:scale-105">
-            <div className="absolute -bottom-5 right-0 w-36 h-36 z-20">
+          <div className="relative bg-gradient-to-br from-slate-700/80 to-slate-800/90 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-violet-300/20 hover:border-violet-300/40 transition-all duration-300 hover:scale-105 overflow-hidden">
+            <div className="absolute bottom-2 right-2 w-20 h-20">
               <Image
                 src="/pswt.png"
                 alt="Airplane"
-                width={144}
-                height={144}
+                width={80}
+                height={80}
                 className="w-full h-full object-contain drop-shadow-lg"
               />
             </div>
@@ -226,13 +242,13 @@ export default function DashboardPage() {
           </div>
 
           {/* Total AWB */}
-          <div className="relative bg-gradient-to-br from-slate-700/80 to-slate-800/90 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-amber-300/20 hover:border-amber-300/40 transition-all duration-300 hover:scale-105">
-            <div className="absolute -bottom-5 right-0 w-36 h-36 z-20">
+          <div className="relative bg-gradient-to-br from-slate-700/80 to-slate-800/90 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-amber-300/20 hover:border-amber-300/40 transition-all duration-300 hover:scale-105 overflow-hidden">
+            <div className="absolute bottom-2 right-2 w-20 h-20">
               <Image
                 src="/bill.png"
                 alt="Airplane"
-                width={144}
-                height={144}
+                width={80}
+                height={80}
                 className="w-full h-full object-contain drop-shadow-lg"
               />
             </div>
@@ -246,13 +262,13 @@ export default function DashboardPage() {
           </div>
 
           {/* Success Rate */}
-          <div className="relative bg-gradient-to-br from-slate-700/80 to-slate-800/90 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-teal-300/20 hover:border-teal-300/40 transition-all duration-300 hover:scale-105">
-            <div className="absolute -bottom-5 right-0 w-36 h-36 z-20">
+          <div className="relative bg-gradient-to-br from-slate-700/80 to-slate-800/90 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-teal-300/20 hover:border-teal-300/40 transition-all duration-300 hover:scale-105 overflow-hidden">
+            <div className="absolute bottom-2 right-2 w-20 h-20">
               <Image
                 src="/rate.png"
                 alt="Airplane"
-                width={144}
-                height={144}
+                width={80}
+                height={80}
                 className="w-full h-full object-contain drop-shadow-lg"
               />
             </div>

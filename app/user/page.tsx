@@ -4,14 +4,21 @@ import { useState, useEffect, useCallback } from 'react'
 import Sidebar from '../components/Sidebar'
 import MobileNav from '../components/MobileNav'
 import toast from 'react-hot-toast'
+import { useAuthCheck } from '../components/withAuth'
 
 interface User {
   id_usr: number
   email: string
   id_role: number
+  id_air: number | null
   is_active: number
   role?: {
     code_role: string
+  }
+  airline?: {
+    id_air: number
+    airline_code: string
+    airline_name: string
   }
 }
 
@@ -21,9 +28,19 @@ interface Role {
   is_active: number
 }
 
+interface Airline {
+  id_air: number
+  airline_code: string
+  airline_name: string
+}
+
 export default function UserManagementPage() {
+  // Protect page - only admin can access user management
+  const { isAuthorized, isLoading } = useAuthCheck(['admin']);
+
   const [users, setUsers] = useState<User[]>([])
   const [roles, setRoles] = useState<Role[]>([])
+  const [airlines, setAirlines] = useState<Airline[]>([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
   const [currentUser, setCurrentUser] = useState<User | null>(null)
@@ -33,12 +50,14 @@ export default function UserManagementPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const [showPassword, setShowPassword] = useState(false)
-  
+  const [selectedRole, setSelectedRole] = useState<string>('')
+
   // Form state
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     id_role: '',
+    id_air: '',
     is_active: 1
   })
 
@@ -52,6 +71,19 @@ export default function UserManagementPage() {
     } catch (error) {
       console.error('Error loading roles:', error)
       toast.error('Failed to load roles')
+    }
+  }
+
+  const loadAirlines = async () => {
+    try {
+      const res = await fetch('/api/airlines')
+      const data = await res.json()
+      if (data.success) {
+        setAirlines(data.data)
+      }
+    } catch (error) {
+      console.error('Error loading airlines:', error)
+      toast.error('Failed to load airlines')
     }
   }
 
@@ -72,13 +104,13 @@ export default function UserManagementPage() {
     }
   }, [filterRole, filterStatus])
 
-  // Load users and roles
+  // Load roles and airlines only once on mount
   useEffect(() => {
     loadRoles()
-    loadUsers()
-  }, [loadUsers])
+    loadAirlines()
+  }, [])
 
-  // Reload users when filters change
+  // Load/reload users when filters change
   useEffect(() => {
     loadUsers()
   }, [loadUsers])
@@ -86,24 +118,33 @@ export default function UserManagementPage() {
   const openAddModal = () => {
     setIsEditMode(false)
     setCurrentUser(null)
+    setSelectedRole('')
     setFormData({
       email: '',
       password: '',
       id_role: '',
+      id_air: '',
       is_active: 1
     })
+    // Reload airlines to get latest data
+    loadAirlines()
     setIsModalOpen(true)
   }
 
   const openEditModal = (user: User) => {
     setIsEditMode(true)
     setCurrentUser(user)
+    const roleCode = user.role?.code_role || ''
+    setSelectedRole(roleCode)
     setFormData({
       email: user.email,
       password: '',
       id_role: user.id_role.toString(),
+      id_air: user.id_air ? user.id_air.toString() : '',
       is_active: user.is_active
     })
+    // Reload airlines to get latest data
+    loadAirlines()
     setIsModalOpen(true)
   }
 
@@ -111,10 +152,12 @@ export default function UserManagementPage() {
     setIsModalOpen(false)
     setCurrentUser(null)
     setShowPassword(false)
+    setSelectedRole('')
     setFormData({
       email: '',
       password: '',
       id_role: '',
+      id_air: '',
       is_active: 1
     })
   }
@@ -132,6 +175,12 @@ export default function UserManagementPage() {
       return
     }
 
+    // Validate airline for airline role
+    if (selectedRole?.toLowerCase() === 'airline' && !formData.id_air) {
+      toast.error('Airline is required for airline role!')
+      return
+    }
+
     try {
       if (isEditMode && currentUser) {
         // Update user
@@ -143,6 +192,7 @@ export default function UserManagementPage() {
             email: formData.email,
             password: formData.password,
             id_role: formData.id_role,
+            id_air: formData.id_air || null,
             is_active: formData.is_active
           })
         })
@@ -164,6 +214,7 @@ export default function UserManagementPage() {
             email: formData.email,
             password: formData.password,
             id_role: formData.id_role,
+            id_air: formData.id_air || null,
             is_active: formData.is_active
           })
         })
@@ -218,6 +269,7 @@ export default function UserManagementPage() {
           id_usr: userId,
           email: user.email,
           id_role: user.id_role,
+          id_air: user.id_air || null,
           is_active: newStatus
         })
       })
@@ -272,6 +324,18 @@ export default function UserManagementPage() {
     } else {
       return 'bg-purple-500/20 text-purple-300 border-purple-400/30'
     }
+  }
+
+  // Show loading screen while checking authorization (after all hooks are called)
+  if (isLoading || !isAuthorized) {
+    return (
+      <div className="flex min-h-screen bg-gradient-to-br from-slate-800 to-gray-900 text-white items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
+          <p className="mt-4 text-gray-400">Checking access...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -472,6 +536,9 @@ export default function UserManagementPage() {
                   <th className="text-left py-4 px-4 text-sm font-semibold text-gray-300 uppercase tracking-wide">
                     Role
                   </th>
+                  <th className="text-left py-4 px-4 text-sm font-semibold text-gray-300 uppercase tracking-wide">
+                    Airline
+                  </th>
                   <th className="text-center py-4 px-4 text-sm font-semibold text-gray-300 uppercase tracking-wide">
                     Status
                   </th>
@@ -499,6 +566,20 @@ export default function UserManagementPage() {
                         <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getRoleColorStyle(user.role?.code_role || '')}`}>
                           {user.role?.code_role}
                         </span>
+                      </td>
+                      <td className="py-4 px-4">
+                        {user.airline ? (
+                          <div className="flex items-center gap-2">
+                            <span className="px-2 py-1 rounded bg-blue-500/20 text-blue-300 text-xs font-medium border border-blue-400/30">
+                              {user.airline.airline_code}
+                            </span>
+                            <span className="text-gray-400 text-xs">
+                              {user.airline.airline_name}
+                            </span>
+                          </div>
+                        ) : (
+                          <span className="text-gray-500 text-xs">-</span>
+                        )}
                       </td>
                       <td className="py-4 px-4 text-center">
                         <button
@@ -532,7 +613,7 @@ export default function UserManagementPage() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={5} className="py-8 px-4 text-center">
+                    <td colSpan={6} className="py-8 px-4 text-center">
                       <div className="flex flex-col items-center space-y-2 text-gray-400">
                         <span className="text-4xl">📭</span>
                         <span className="text-lg">
@@ -730,7 +811,12 @@ export default function UserManagementPage() {
                   <select
                     id="role"
                     value={formData.id_role}
-                    onChange={(e) => setFormData({ ...formData, id_role: e.target.value })}
+                    onChange={(e) => {
+                      const selectedRoleId = e.target.value
+                      const role = roles.find(r => r.id_role === parseInt(selectedRoleId))
+                      setSelectedRole(role?.code_role || '')
+                      setFormData({ ...formData, id_role: selectedRoleId, id_air: '' })
+                    }}
                     className="w-full px-4 py-3 bg-slate-800/40 backdrop-blur-sm text-white border border-slate-600/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400/60 focus:border-cyan-400/60 transition-all duration-200 hover:bg-slate-700/40 hover:border-slate-500/50"
                     required
                   >
@@ -742,6 +828,35 @@ export default function UserManagementPage() {
                     ))}
                   </select>
                 </div>
+
+                {/* Airline Select - Only for airline role */}
+                {selectedRole?.toLowerCase() === 'airline' && (
+                  <div className="group">
+                    <label htmlFor="airline" className="flex items-center gap-2 text-sm font-semibold text-slate-200 mb-2">
+                    <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                  </svg>
+                      Airline
+                      <span className="text-red-400 text-xs">*</span>
+                    </label>
+                    <select
+                      id="airline"
+                      value={formData.id_air}
+                      onChange={(e) => {
+                        setFormData({ ...formData, id_air: e.target.value })
+                      }}
+                      className="w-full px-4 py-3 bg-slate-800/40 backdrop-blur-sm text-white border border-slate-600/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400/60 focus:border-cyan-400/60 transition-all duration-200 hover:bg-slate-700/40 hover:border-slate-500/50"
+                      required
+                    >
+                      <option value="" className="bg-slate-800">Choose an airline</option>
+                      {airlines.map(airline => (
+                        <option key={airline.id_air} value={airline.id_air} className="bg-slate-800">
+                          {airline.airline_code} - {airline.airline_name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
 
                 {/* Status Info */}
                 <div className="group">

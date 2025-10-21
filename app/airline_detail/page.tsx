@@ -5,62 +5,96 @@ import { Suspense } from "react";
 import Sidebar from "../components/Sidebar";
 import MobileNav from "../components/MobileNav";
 import Image from "next/image";
+import { useAuthCheck } from "../components/withAuth";
 
 const airlineAirplanes: { [key: string]: string } = {
-  QR: "QR.png",
-  IN: "IN.png",
-  SQ: "SQ.png",
-  AK: "AK.png",
-  "5J": "5J.png",
-  AI: "AI.png",
-  NZ: "NZ.png",
-  FS: "FS.png",
-  EY: "EY.png",
-  SV: "SV.png",
-  WY: "WY.png",
-  NH: "NH.png",
   "2Y": "2Y.png",
   "3K": "3K.png",
+  "5J": "5J.png",
   "7B": "7B.png",
   "8B": "8B.png",
   "8K": "8K.png",
+  AI: "AI.png",
+  AK: "AK.png",
+  BR: "BR.png",
   CV: "CV.png",
   CX: "CX.png",
   EK: "EK.png",
+  EY: "EY.png",
   FD: "FD.png",
+  FS: "FS.png",
   GM: "GM.png",
   HO: "HO.png",
+  IN: "IN.png",
   JX: "JX.png",
   MH: "MH.png",
   MU: "MU.png",
+  NH: "NH.png",
+  NZ: "NZ.png",
   PR: "PR.png",
   QF: "QF.png",
+  QR: "QR.png",
   QZ: "QZ.png",
   SJ: "SJ.png",
+  SQ: "SQ.png",
+  SV: "SV.png",
   TA: "TA.png",
   TK: "TK.png",
   VA: "VA.png",
+  WY: "WY.png",
 };
 
 const airlineData: { [key: string]: { name: string; code: string } } = {
-  QR: {
-    name: "Qatar Airways",
-    code: "QR",
-  },
-  IN: { name: "Nam Air", code: "IN" },
-  SQ: { name: "Singapore Airlines", code: "SQ" },
-  AK: { name: "Air Asia", code: "AK" },
+  "2Y": { name: "My Indo Airlines", code: "2Y" },
+  "3K": { name: "Jetstar Asia Airways", code: "3K" },
   "5J": { name: "Cebu Pacific", code: "5J" },
+  "7B": { name: "Kologk Aviation", code: "7B" },
+  "8B": { name: "Transnusa", code: "8B" },
+  "8K": { name: "K-Mile", code: "8K" },
+  "0B": { name: "BBN Airlines Indonesia", code: "0B" },
+  "2T": { name: "West Star Aviation", code: "2T" },
   AI: { name: "Air India", code: "AI" },
-  NZ: { name: "Air New Zealand", code: "NZ" },
-  FS: { name: "Air Fast", code: "FS" },
+  AK: { name: "Air Asia Malaysia", code: "AK" },
+  AX: { name: "Air X Charter", code: "AX" },
+  AZ: { name: "Silkway Airlines", code: "AZ" },
+  BR: { name: "Eva Air", code: "BR" },
+  BS: { name: "Bluesky Airways", code: "BS" },
+  BT: { name: "Volkswagen Airservice", code: "BT" },
+  CV: { name: "Cargolux", code: "CV" },
+  CX: { name: "Cathay Pacific", code: "CX" },
+  EI: { name: "Alliance Flight Support", code: "EI" },
+  EK: { name: "Emirates Airlines", code: "EK" },
   EY: { name: "Etihad Airways", code: "EY" },
-  SV: { name: "Saudi Arabian Airlines", code: "SV" },
-  WY: { name: "Oman Air", code: "WY" },
+  FD: { name: "Thai AirAsia", code: "FD" },
+  FS: { name: "Airfast Indonesia", code: "FS" },
+  GM: { name: "Tri MG", code: "GM" },
+  HO: { name: "Juneyao Airlines", code: "HO" },
+  HZ: { name: "Alpha Star Aviation Services", code: "HZ" },
+  IG: { name: "Skytaxi", code: "IG" },
+  IN: { name: "Nam Air", code: "IN" },
+  JX: { name: "Starlux Airlines", code: "JX" },
+  MH: { name: "Malaysia Airlines", code: "MH" },
+  MU: { name: "China Eastern Airlines", code: "MU" },
   NH: { name: "All Nippon Airways", code: "NH" },
+  NZ: { name: "Air New Zealand", code: "NZ" },
+  OZ: { name: "Asiana Airlines", code: "OZ" },
+  PR: { name: "Philippine Airlines", code: "PR" },
+  QF: { name: "Qantas", code: "QF" },
+  QR: { name: "Qatar Airways", code: "QR" },
+  QZ: { name: "Air Asia Indonesia", code: "QZ" },
+  SJ: { name: "Sriwijaya Air", code: "SJ" },
+  SQ: { name: "Singapore Airlines", code: "SQ" },
+  SV: { name: "Saudia", code: "SV" },
+  TA: { name: "TACA International", code: "TA" },
+  TK: { name: "Turkish Airlines", code: "TK" },
+  VA: { name: "Virgin Australia", code: "VA" },
+  WY: { name: "Oman Air", code: "WY" },
 };
 
 function AirlineDetailContent() {
+  // Protect page - all authenticated roles can access
+  const { isAuthorized, isLoading } = useAuthCheck(['admin', 'view', 'airline']);
+
   const searchParams = useSearchParams();
   const airlineCode = searchParams.get("airline") || "QR";
   const flightNumber = searchParams.get("flight") || "";
@@ -108,6 +142,18 @@ function AirlineDetailContent() {
       status: "Loading",
     },
   ];
+
+  // Show loading screen while checking authorization (after all hooks are called)
+  if (isLoading || !isAuthorized) {
+    return (
+      <div className="flex min-h-screen bg-gradient-to-br from-slate-800 to-gray-900 text-white items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
+          <p className="mt-4 text-gray-400">Checking access...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-[#0a0e1a] via-[#1a2744] to-[#0f1829] text-white overflow-hidden">

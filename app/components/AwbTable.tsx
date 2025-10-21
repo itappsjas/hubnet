@@ -39,10 +39,10 @@ export default function AwbTable() {
           }))
           setAwbData(mapped)
         } else {
-          console.warn('⚠️ Format response tidak sesuai:', json)
+          console.warn('⚠️ Response format mismatch:', json)
         }
       } catch (error) {
-        console.error('❌ Gagal fetch:', error)
+        console.error('❌ Fetch failed:', error)
       } finally {
         setLoading(false)
       }

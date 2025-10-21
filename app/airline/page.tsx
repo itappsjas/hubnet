@@ -5,8 +5,24 @@ import MobileNav from "../components/MobileNav";
 import PageHeader from "../components/PageHeader";
 import Image from "next/image";
 import Link from "next/link";
+import { useAuthCheck } from "../components/withAuth";
 
 export default function DashboardPage() {
+  // Protect page - only admin and view can access airline list
+  const { isAuthorized, isLoading } = useAuthCheck(['admin', 'view']);
+
+  // Show loading screen while checking authorization
+  if (isLoading || !isAuthorized) {
+    return (
+      <div className="flex min-h-screen bg-gradient-to-br from-slate-800 to-gray-900 text-white items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
+          <p className="mt-4 text-gray-400">Checking access...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-slate-800 to-gray-900 text-white relative">
       <Sidebar />
@@ -90,7 +106,7 @@ export default function DashboardPage() {
           {/* ROW 1 */}
           {/* Qatar Airways - YELLOW */}
           <Link
-            href="/airline_flights?airline=QR"
+            href="/airline_flight?airline=QR"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-yellow-500/90 via-yellow-600/90 to-yellow-700/90 backdrop-blur-sm border border-yellow-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -160,7 +176,7 @@ export default function DashboardPage() {
 
           {/* Nam Air - ORANGE */}
           <Link
-            href="/airline_flights?airline=IN"
+            href="/airline_flight?airline=IN"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-orange-500/90 via-orange-600/90 to-orange-700/90 backdrop-blur-sm border border-orange-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -230,7 +246,7 @@ export default function DashboardPage() {
 
           {/* Singapore Airlines - RED */}
           <Link
-            href="/airline_flights?airline=SQ"
+            href="/airline_flight?airline=SQ"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-red-500/90 via-red-600/90 to-red-700/90 backdrop-blur-sm border border-red-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -302,7 +318,7 @@ export default function DashboardPage() {
 
           {/* Air Asia - BLUE */}
           <Link
-            href="/airline_flights?airline=AK"
+            href="/airline_flight?airline=AK"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-500/90 via-blue-600/90 to-blue-700/90 backdrop-blur-sm border border-blue-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -373,7 +389,7 @@ export default function DashboardPage() {
           {/* ROW 2 */}
           {/* Eva Air - BLUE */}
           <Link
-            href="/airline_flights?airline=NZ"
+            href="/airline_flight?airline=NZ"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-500/90 via-blue-600/90 to-blue-700/90 backdrop-blur-sm border border-blue-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -443,7 +459,7 @@ export default function DashboardPage() {
 
           {/* Cebu Pacific - ORANGE */}
           <Link
-            href="/airline_flights?airline=5J"
+            href="/airline_flight?airline=5J"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-red-500/90 via-red-600/90 to-red-700/90 backdrop-blur-sm border border-red-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -513,7 +529,7 @@ export default function DashboardPage() {
 
           {/* Air India - YELLOW */}
           <Link
-            href="/airline_flights?airline=AI"
+            href="/airline_flight?airline=AI"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-yellow-500/90 via-yellow-600/90 to-yellow-700/90 backdrop-blur-sm border border-yellow-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -583,7 +599,7 @@ export default function DashboardPage() {
 
           {/* Air Fast Indonesia - RED */}
           <Link
-            href="/airline_flights?airline=FS"
+            href="/airline_flight?airline=FS"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-orange-500/90 via-orange-600/90 to-orange-700/90 backdrop-blur-sm border border-orange-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -654,7 +670,7 @@ export default function DashboardPage() {
           {/* ROW 3 - MIXED AGAIN */}
           {/* Saudia - ORANGE */}
           <Link
-            href="/airline_flights?airline=SV"
+            href="/airline_flight?airline=SV"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-orange-500/90 via-orange-600/90 to-orange-700/90 backdrop-blur-sm border border-orange-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -724,7 +740,7 @@ export default function DashboardPage() {
 
           {/* Etihad Airways - BLUE */}
           <Link
-            href="/airline_flights?airline=EY"
+            href="/airline_flight?airline=EY"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-500/90 via-blue-600/90 to-blue-700/90 backdrop-blur-sm border border-blue-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -794,7 +810,7 @@ export default function DashboardPage() {
 
           {/* Oman Air - RED */}
           <Link
-            href="/airline_flights?airline=WY"
+            href="/airline_flight?airline=WY"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-red-500/90 via-red-600/90 to-red-700/90 backdrop-blur-sm border border-red-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}
@@ -864,7 +880,7 @@ export default function DashboardPage() {
 
           {/* All Nippon Airways - YELLOW */}
           <Link
-            href="/airline_flights?airline=NH"
+            href="/airline_flight?airline=NH"
             className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-yellow-500/90 via-yellow-600/90 to-yellow-700/90 backdrop-blur-sm border border-yellow-400/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-102 block"
           >
             {/* Background Pattern */}

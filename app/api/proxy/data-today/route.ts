@@ -13,12 +13,12 @@ export async function GET() {
     })
 
     if (!res.ok) {
-      return NextResponse.json({ success: false, message: 'Gagal ambil data dari server lokal' }, { status: res.status })
+      return NextResponse.json({ success: false, message: 'Failed to fetch data from local server' }, { status: res.status })
     }
 
     const data = await res.json()
     return NextResponse.json({ success: true, data })
   } catch {
-    return NextResponse.json({ success: false, message: 'Gagal fetch dari API lokal' }, { status: 500 })
+    return NextResponse.json({ success: false, message: 'Failed to fetch from local API' }, { status: 500 })
   }
 }

@@ -27,7 +27,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     if (!username || !password) {
-      toast.error("Username dan password wajib diisi.");
+      toast.error("Username and password are required");
       return;
     }
 
@@ -46,19 +46,24 @@ export default function LoginPage() {
 
       if (!res.ok) {
         const errorJson = await res.json();
-        toast.error(errorJson.message || "Login gagal");
+        toast.error(errorJson.message || "Login failed");
         return;
       }
 
       const data = await res.json();
       if (data.success) {
-        toast.success("Login berhasil!");
+        // Save user data to localStorage
+        localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem('logged_in', data.logged_in);
+        localStorage.setItem('login_time', data.login_time.toString());
+        
+        toast.success("Login successful!");
         router.push("/dashboard");
       } else {
-        toast.error("Login gagal: Username atau password salah.");
+        toast.error("Login failed: Invalid username or password");
       }
     } catch {
-      toast.error("Terjadi kesalahan saat login.");
+      toast.error("An error occurred during login");
     } finally {
       setIsLoading(false);
     }
