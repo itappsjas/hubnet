@@ -56,50 +56,50 @@ export default function DashboardPage() {
         <div className="mb-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* Station Filter */}
-            <div className="bg-slate-800/40 backdrop-blur-md rounded-xl border border-white/10 p-4 hover:border-white/20 transition-all duration-300">
+            <div className="bg-slate-700/60 backdrop-blur-md rounded-xl border border-slate-600/50 p-4 hover:border-yellow-400/50 transition-all duration-300 shadow-lg">
               <label
                 htmlFor="station"
-                className="block text-base font-medium text-yellow-500 flex items-center gap-2"
+                className="block text-base font-semibold text-yellow-400 flex items-center gap-2 mb-2"
               >
-                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-700/40 border border-yellow-500/20">
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-600/60 border border-yellow-400/30">
                   🏢
                 </span>
                 Station
               </label>
               <select
                 id="station"
-                className="mt-3 block w-full text-base h-12 px-4 py-2 bg-slate-900/50 border-slate-700 text-white rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500 transition-colors duration-200"
+                className="block w-full text-base h-12 px-4 py-2 bg-slate-800/80 border border-slate-500/50 text-white rounded-lg shadow-sm focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400 transition-all duration-200 hover:border-slate-400/50"
               >
                 <option value="">Select Station</option>
               </select>
             </div>
 
             {/* Airline Filter */}
-            <div className="bg-slate-800/40 backdrop-blur-md rounded-xl border border-white/10 p-4 hover:border-white/20 transition-all duration-300">
+            <div className="bg-slate-700/60 backdrop-blur-md rounded-xl border border-slate-600/50 p-4 hover:border-yellow-400/50 transition-all duration-300 shadow-lg">
               <label
                 htmlFor="airline"
-                className="block text-base font-medium text-yellow-400 flex items-center gap-2"
+                className="block text-base font-semibold text-yellow-400 flex items-center gap-2 mb-2"
               >
-                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-700/40 border border-yellow-500/20">
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-600/60 border border-yellow-400/30">
                   ✈️
                 </span>
                 Airline
               </label>
               <select
                 id="airline"
-                className="mt-3 block w-full text-base h-12 px-4 py-2 bg-slate-900/50 border-slate-700 text-white rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500 transition-colors duration-200"
+                className="block w-full text-base h-12 px-4 py-2 bg-slate-800/80 border border-slate-500/50 text-white rounded-lg shadow-sm focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400 transition-all duration-200 hover:border-slate-400/50"
               >
                 <option value="">Select Airline</option>
               </select>
             </div>
 
             {/* Date From Filter */}
-            <div className="bg-slate-800/40 backdrop-blur-md rounded-xl border border-white/10 p-4 hover:border-white/20 transition-all duration-300">
+            <div className="bg-slate-700/60 backdrop-blur-md rounded-xl border border-slate-600/50 p-4 hover:border-yellow-400/50 transition-all duration-300 shadow-lg">
               <label
                 htmlFor="dateFrom"
-                className="block text-base font-medium text-yellow-400 flex items-center gap-2"
+                className="block text-base font-semibold text-yellow-400 flex items-center gap-2 mb-2"
               >
-                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-700/40 border border-yellow-500/20">
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-600/60 border border-yellow-400/30">
                   📅
                 </span>
                 Date From<span className="text-red-400 ml-1">*</span>
@@ -108,17 +108,17 @@ export default function DashboardPage() {
                 type="date"
                 id="dateFrom"
                 required
-                className="mt-3 block w-full text-base h-12 px-4 py-2 bg-slate-900/50 border-slate-700 text-white rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500 transition-colors duration-200"
+                className="block w-full text-base h-12 px-4 py-2 bg-slate-800/80 border border-slate-500/50 text-white rounded-lg shadow-sm focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400 transition-all duration-200 hover:border-slate-400/50 [color-scheme:dark]"
               />
             </div>
 
             {/* Date To Filter */}
-            <div className="bg-slate-800/40 backdrop-blur-md rounded-xl border border-white/10 p-4 hover:border-white/20 transition-all duration-300">
+            <div className="bg-slate-700/60 backdrop-blur-md rounded-xl border border-slate-600/50 p-4 hover:border-yellow-400/50 transition-all duration-300 shadow-lg">
               <label
                 htmlFor="dateTo"
-                className="block text-base font-medium text-yellow-400 flex items-center gap-2"
+                className="block text-base font-semibold text-yellow-400 flex items-center gap-2 mb-2"
               >
-                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-700/40 border border-yellow-500/20">
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-600/60 border border-yellow-400/30">
                   📅
                 </span>
                 Date To<span className="text-red-400 ml-1">*</span>
@@ -127,7 +127,7 @@ export default function DashboardPage() {
                 type="date"
                 id="dateTo"
                 required
-                className="mt-3 block w-full text-base h-12 px-4 py-2 bg-slate-900/50 border-slate-700 text-white rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500 transition-colors duration-200"
+                className="block w-full text-base h-12 px-4 py-2 bg-slate-800/80 border border-slate-500/50 text-white rounded-lg shadow-sm focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400 transition-all duration-200 hover:border-slate-400/50 [color-scheme:dark]"
               />
             </div>
           </div>

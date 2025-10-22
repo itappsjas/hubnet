@@ -575,7 +575,8 @@ export default function DashboardPage() {
                 type="date"
                 id="dateFrom"
                 required
-                className="w-full h-11 px-4 py-2 bg-slate-600/40 border border-slate-500/40 rounded-xl text-white/90 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400/50 focus:border-violet-400/50 transition-all duration-200 group-hover:border-slate-400/60"
+                className="w-full h-11 px-4 py-2 bg-slate-600/40 border border-slate-500/40 rounded-xl text-white/90 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400/50 focus:border-violet-400/50 transition-all duration-200 group-hover:border-slate-400/60 [color-scheme:dark]"
+                style={{ colorScheme: 'dark' }}
               />
             </div>
 
@@ -593,7 +594,8 @@ export default function DashboardPage() {
                 type="date"
                 id="dateTo"
                 required
-                className="w-full h-11 px-4 py-2 bg-slate-600/40 border border-slate-500/40 rounded-xl text-white/90 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400/50 transition-all duration-200 group-hover:border-slate-400/60"
+                className="w-full h-11 px-4 py-2 bg-slate-600/40 border border-slate-500/40 rounded-xl text-white/90 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400/50 transition-all duration-200 group-hover:border-slate-400/60 [color-scheme:dark]"
+                style={{ colorScheme: 'dark' }}
               />
             </div>
           </div>
