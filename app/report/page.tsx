@@ -59,7 +59,7 @@ export default function DashboardPage() {
             <div className="bg-slate-700/60 backdrop-blur-md rounded-xl border border-slate-600/50 p-4 hover:border-yellow-400/50 transition-all duration-300 shadow-lg">
               <label
                 htmlFor="station"
-                className="block text-base font-semibold text-yellow-400 flex items-center gap-2 mb-2"
+                className="block text-base text-yellow-400 flex items-center gap-2 mb-2"
               >
                 <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-600/60 border border-yellow-400/30">
                   🏢
@@ -78,7 +78,7 @@ export default function DashboardPage() {
             <div className="bg-slate-700/60 backdrop-blur-md rounded-xl border border-slate-600/50 p-4 hover:border-yellow-400/50 transition-all duration-300 shadow-lg">
               <label
                 htmlFor="airline"
-                className="block text-base font-semibold text-yellow-400 flex items-center gap-2 mb-2"
+                className="block text-base text-yellow-400 flex items-center gap-2 mb-2"
               >
                 <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-600/60 border border-yellow-400/30">
                   ✈️
@@ -97,7 +97,7 @@ export default function DashboardPage() {
             <div className="bg-slate-700/60 backdrop-blur-md rounded-xl border border-slate-600/50 p-4 hover:border-yellow-400/50 transition-all duration-300 shadow-lg">
               <label
                 htmlFor="dateFrom"
-                className="block text-base font-semibold text-yellow-400 flex items-center gap-2 mb-2"
+                className="block text-base text-yellow-400 flex items-center gap-2 mb-2"
               >
                 <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-600/60 border border-yellow-400/30">
                   📅
@@ -116,7 +116,7 @@ export default function DashboardPage() {
             <div className="bg-slate-700/60 backdrop-blur-md rounded-xl border border-slate-600/50 p-4 hover:border-yellow-400/50 transition-all duration-300 shadow-lg">
               <label
                 htmlFor="dateTo"
-                className="block text-base font-semibold text-yellow-400 flex items-center gap-2 mb-2"
+                className="block text-base text-yellow-400 flex items-center gap-2 mb-2"
               >
                 <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-600/60 border border-yellow-400/30">
                   📅
