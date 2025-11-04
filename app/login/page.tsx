@@ -133,7 +133,7 @@ export default function LoginPage() {
                       alt="JAS Logo"
                       width={200}
                       height={160}
-                      className="rounded-2xl shadow-lg transition-all duration-300 hover:scale-105"
+                      className="shadow-lg transition-all duration-300 hover:scale-105"
                     />
                   </div>
                   <div className="space-y-3 animate-fade-in-clean" style={{ animationDelay: "0.4s" }}>

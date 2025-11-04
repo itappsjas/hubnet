@@ -13,10 +13,12 @@ model tb_user {
   id_air              Int
   email               String    @unique
   password            String
+  no_hp               String 
   is_active           Int       @default(1)
   reset_token         String?   @db.VarChar(10)
   reset_token_expires DateTime? @db.DateTime(0)
   role                tb_role   @relation(fields: [id_role], references: [id_role])
+  airline             tb_airline? @relation(fields: [id_air], references: [id_air])
 
   @@index([id_role], map: "tb_user_id_role_fkey")
   @@index([reset_token], map: "idx_reset_token")
@@ -33,4 +35,5 @@ model tb_airline {
   id_air       Int     @id @default(autoincrement())
   airline_code String? @db.VarChar(5)
   airline_name String? @db.VarChar(50)
+  users        tb_user[]
 }

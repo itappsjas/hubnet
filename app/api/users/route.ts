@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
         email,
         password: hashedPassword,
         id_role: parseInt(id_role),
-        id_air: id_air ? parseInt(id_air) : null,
+        id_air: id_air ? parseInt(id_air) : 0,
         is_active: is_active ?? 1
       },
       include: {
@@ -153,13 +153,13 @@ export async function PUT(request: NextRequest) {
     const updateData: {
       email: string;
       id_role: number;
-      id_air: number | null;
+      id_air: number;
       is_active: number;
       password?: string;
     } = {
       email,
       id_role: parseInt(id_role),
-      id_air: id_air ? parseInt(id_air) : null,
+      id_air: id_air ? parseInt(id_air) : 0,
       is_active: is_active ? 1 : 0
     }
 

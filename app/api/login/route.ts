@@ -8,15 +8,14 @@ export async function POST(request: Request) {
     try {
         const { username, password } = await request.json();
         
-        // Find user by email with role and airline info
+        // Find user by email with role info only
         const user = await prisma.tb_user.findFirst({
             where: {
                 email: username, // username field from frontend is actually email
                 is_active: 1
             },
             include: {
-                role: true,
-                airline: true
+                role: true
             }
         });
 
@@ -25,6 +24,19 @@ export async function POST(request: Request) {
             const isPasswordValid = await bcrypt.compare(password, user.password);
             
             if (isPasswordValid) {
+                // Get airline info separately if needed
+                let airlineInfo = null;
+                if (user.id_air && user.id_air !== 0) {
+                    try {
+                        airlineInfo = await prisma.tb_airline.findUnique({
+                            where: { id_air: user.id_air }
+                        });
+                    } catch (error) {
+                        console.log('Airline not found for id_air:', user.id_air);
+                        airlineInfo = null;
+                    }
+                }
+                
                 // User found and password valid - Login successful
                 const loginTime = new Date().getTime(); // Get current timestamp
                 // Role logic for frontend menu access
@@ -33,7 +45,7 @@ export async function POST(request: Request) {
                     canGenerateReport: false,
                     canManageUser: false,
                     airlineMenuDirect: false,
-                    airlineCode: user.airline?.airline_code || null,
+                    airlineCode: airlineInfo?.airline_code || null,
                     allowedMenus: [] as string[]
                 };
                 const roleCode = user.role.code_role.toLowerCase();
@@ -62,7 +74,7 @@ export async function POST(request: Request) {
                         canGenerateReport: false,
                         canManageUser: false,
                         airlineMenuDirect: true,
-                        airlineCode: user.airline?.airline_code || null,
+                        airlineCode: airlineInfo?.airline_code || null,
                         allowedMenus: ['dashboard', 'airline']
                     };
                 }
@@ -75,8 +87,8 @@ export async function POST(request: Request) {
                         email: user.email,
                         role: user.role.code_role.toLowerCase(), // Convert to lowercase for consistency
                         roleId: user.id_role,
-                        airlineCode: user.airline?.airline_code,
-                        airlineName: user.airline?.airline_name,
+                        airlineCode: airlineInfo?.airline_code,
+                        airlineName: airlineInfo?.airline_name,
                         menuAccess
                     }
                 });
